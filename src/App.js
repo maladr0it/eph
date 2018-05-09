@@ -1,16 +1,20 @@
 import React, { Component } from 'react';
 import './App.css';
 
-import { login } from './api';
+import {
+  login,
+  createThread,
+} from './api';
 
 class App extends Component {
   async componentDidMount() {
-    login();
+    const user = await login();
+    console.log(user);
   }
   render() {
     return (
       <div>
-        hi
+        <button onClick={() => createThread()}>+</button>
       </div>
     );
   }
