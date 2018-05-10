@@ -67,6 +67,14 @@ class App extends Component {
       this.loggedIn(userId);
     },
     selectThread: this.threadSelected,
+    startListening: (userId) => {
+      const onMessage = this.messageAdded;
+      const onThread = (threadId, threadData) => {
+        this.threadAdded(threadId, threadData);
+        listenForMessages(threadId, onMessage);
+      };
+      listenForThreads(userId, onThread);
+    },
   }
   render() {
     return (
@@ -76,16 +84,7 @@ class App extends Component {
           LOGIN
         </button>
         <button
-          onClick={() => listenForThreads(
-            this.state.userId,
-            (threadId, threadData) => {
-              this.threadAdded(threadId, threadData);
-              listenForMessages(
-                threadId,
-                this.messageAdded,
-              );
-            },
-          )}
+          onClick={() => this.actions.startListening(this.state.userId)}
         >
           LISTEN_THREADS
         </button>

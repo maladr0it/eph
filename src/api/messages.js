@@ -7,7 +7,12 @@ export const listenForMessages = (threadId, onMessage) => {
   db.ref(`messages/${threadId}`)
     .on('child_added', snap => {
       const id = snap.key;
-      const data = snap.val();
+      const val = snap.val();
+      // shape the message data to a db-agnostic format here
+      const data = {
+        author: val.author,
+        text: val.message,
+      };
       onMessage(threadId, id, data);
     });
 };
