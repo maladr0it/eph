@@ -14,12 +14,29 @@ export const createThread = async (memberIds) => {
   return ref.key;
 };
 
-// TODO: this is unsafe.
-export const getThreads = async (userId) => {
-  const snap = await db.ref('threads')
+// TODO: should use a token instead of userId
+// for security reasons
+export const listenForThreads = (userId, onThread) => {
+  console.log(`listening for ${userId}'s threads...`);
+  db.ref('threads')
   .orderByChild(`members/${userId}`)
   .equalTo(true)
-  .once('value');
-
-  console.log(snap.val());
+  .on('child_added', snap => {
+    const key = snap.key;
+    const data = snap.val();
+    onThread(key);
+  });
 };
+
+export const listenForMessages = (threadId) => {
+  console.log(`listening for ${threadId}'s messages...`);
+};
+
+// export const getThreads = async (userId) => {
+//   const snap = await db.ref('threads')
+//   .orderByChild(`members/${userId}`)
+//   .equalTo(true)
+//   .once('value');
+
+//   console.log(snap.val());
+// };

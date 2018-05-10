@@ -26,5 +26,5 @@ export const login = async () => {
     user = await getUser(userId);
   }
   console.log('logged in as', userId);
-  return user;
+  return userId;
 };

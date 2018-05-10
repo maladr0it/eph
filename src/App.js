@@ -1,30 +1,52 @@
 import React, { Component } from 'react';
-import './App.css';
 
 // test IDs
 // PC:    ZNO5s71UJndyFxNu7alLPrVxfro1
 // PHONE: VhuzOP1UNdT7HN805d6db8eDs1e2 
 
+import ThreadList from './components/ThreadList'
+
 import {
   login,
   createThread,
-  getThreads,
+  listenForThreads,
 } from './api';
+import './App.css';
 
 class App extends Component {
-  async componentDidMount() {
-    console.log('initialised');
+  state = {
+    userId: '',
+    threads: [],
+    messages: [],
   }
+  async login() {
+    const userId = await login();
+    this.setState({
+      userId,
+    });
+  }
+
+  addThread(threadId) {
+    this.setState({
+      threads: this.state.threads.concat(threadId),
+    });
+  }
+
   render() {
+    console.log(this.state);
     return (
       <div>
-        <button onClick={() => login()}>
+        <h3>logged in as: {this.state.userId}</h3>
+        <button onClick={() => this.login()}>
           LOGIN
         </button>
         <button
-          onClick={() => getThreads('ZNO5s71UJndyFxNu7alLPrVxfro1')}
+          onClick={() => listenForThreads(
+            this.state.userId,
+            threadId => this.addThread(threadId)
+          )}
         >
-          GET_THREADS
+          LISTEN_THREADS
         </button>
         <button
           onClick={() => createThread([
@@ -34,8 +56,15 @@ class App extends Component {
         >
           NEW_THREAD
         </button>
+        <ThreadList threadIds={this.state.threads} />
       </div>
     );
   }
 }
 export default App;
+
+/* <button
+  onClick={() => getThreads('ZNO5s71UJndyFxNu7alLPrVxfro1')}
+>
+  GET_THREADS
+</button> */
