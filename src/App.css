@@ -1,3 +1,5 @@
-.App {
-  text-align: center;
+.Panes {
+  background: yellow;
+  display: flex;
+  align-items: space-around;
 }

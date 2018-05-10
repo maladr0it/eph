@@ -1,10 +1,9 @@
 import React from 'react';
 import ThreadItem from './ThreadItem';
 
-const ThreadList = ({ ids }) => {
-
-  return (
-    <div>
+// TODO: change to pureComponent
+const ThreadList = ({ ids }) => (
+  <div>
       THREAD LIST:
       <ul>
         {ids.map(id => (
@@ -12,7 +11,6 @@ const ThreadList = ({ ids }) => {
         ))}
       </ul>
     </div>
-  );
-};
+);
 
 export default ThreadList;

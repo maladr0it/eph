@@ -25,26 +25,18 @@ class App extends Component {
     selectedThread: '',
     threads: {},
     messages: {},
-  }
-  actions = {
-    threadSelected: (id) => {
-      this.setState({
-        selectedThread: id,
-      });
-    },
-  }
-  // store = {
-  //   state: this.state,
-  //   actions: this.actions,
-  // }
-  async login() {
-    const userId = await login();
+  };
+  loggedIn = (userId) => {
     this.setState({
       userId,
     });
   }
-  
-  threadAdded(id, data) {
+  threadSelected = (id) => {
+    this.setState({
+      selectedThread: id,
+    });
+  }
+  threadAdded = (id, data) => {
     this.setState({
       threadIds: this.state.threadIds.concat(id),
       threads: {
@@ -53,7 +45,7 @@ class App extends Component {
       },
     });
   }
-  messageAdded(threadId, messageId, messageData) {
+  messageAdded = (threadId, messageId, messageData) => {
     console.log(`adding a new message ${messageId} to thread ${threadId}`);
     this.setState({
       threads: {
@@ -69,26 +61,30 @@ class App extends Component {
       },
     });
   }
-
+  actions = {
+    login: async () => {
+      const userId = await login();
+      this.loggedIn(userId);
+    },
+    selectThread: this.threadSelected,
+  }
   render() {
     return (
       <div>
         <h3>logged in as: {this.state.userId}</h3>
-        <button onClick={() => this.login()}>
+        <button onClick={() => this.actions.login()}>
           LOGIN
-        </button>
-        <button
-          onClick={() => listenForMessages(
-            this.state.threadIds[0],
-            (threadId, id, data) => this.messageAdded(threadId, id, data),
-          )}
-        >
-          LISTEN_MESSAGES
         </button>
         <button
           onClick={() => listenForThreads(
             this.state.userId,
-            (id, data) => this.threadAdded(id, data)
+            (threadId, threadData) => {
+              this.threadAdded(threadId, threadData);
+              listenForMessages(
+                threadId,
+                this.messageAdded,
+              );
+            },
           )}
         >
           LISTEN_THREADS
@@ -102,8 +98,10 @@ class App extends Component {
           NEW_THREAD
         </button>
         <AppContext.Provider value={{ state: this.state, actions: this.actions }}>
-          <ThreadList ids={this.state.threadIds} />
-          <MessageList />
+          <div className="Panes">
+            <ThreadList ids={this.state.threadIds} />
+            <MessageList threadId={this.state.selectedThread} />
+          </div>
         </AppContext.Provider>
       </div>
     );
