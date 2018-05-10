@@ -1,2 +1,3 @@
-export * from './user.js';
-export * from './threads.js';
+export * from './user';
+export * from './threads';
+export * from './messages';

@@ -4,7 +4,8 @@ import React, { Component } from 'react';
 // PC:    ZNO5s71UJndyFxNu7alLPrVxfro1
 // PHONE: VhuzOP1UNdT7HN805d6db8eDs1e2 
 
-import Threads from './components/Threads'
+import ThreadList from './components/ThreadList';
+import MessageList from './components/MessageList';
 
 import {
   login,
@@ -14,6 +15,101 @@ import {
 } from './api';
 import './App.css';
 import { isContext } from 'vm';
+
+export const AppContext = new React.createContext();
+
+class App extends Component {
+  state = {
+    userId: '',
+    threadIds: [],
+    selectedThread: '',
+    threads: {},
+    messages: {},
+  }
+  actions = {
+    threadSelected: (id) => {
+      this.setState({
+        selectedThread: id,
+      });
+    },
+  }
+  // store = {
+  //   state: this.state,
+  //   actions: this.actions,
+  // }
+  async login() {
+    const userId = await login();
+    this.setState({
+      userId,
+    });
+  }
+  
+  threadAdded(id, data) {
+    this.setState({
+      threadIds: this.state.threadIds.concat(id),
+      threads: {
+        ...this.state.threads,
+        [id]: data,
+      },
+    });
+  }
+  messageAdded(threadId, messageId, messageData) {
+    console.log(`adding a new message ${messageId} to thread ${threadId}`);
+    this.setState({
+      threads: {
+        ...this.state.threads,
+        [threadId]: {
+          ...this.state.threads[threadId],
+          messageIds: (this.state.threads[threadId].messageIds || []).concat(messageId),
+        },
+      },
+      messages: {
+        ...this.state.messages,
+        [messageId]: messageData,
+      },
+    });
+  }
+
+  render() {
+    return (
+      <div>
+        <h3>logged in as: {this.state.userId}</h3>
+        <button onClick={() => this.login()}>
+          LOGIN
+        </button>
+        <button
+          onClick={() => listenForMessages(
+            this.state.threadIds[0],
+            (threadId, id, data) => this.messageAdded(threadId, id, data),
+          )}
+        >
+          LISTEN_MESSAGES
+        </button>
+        <button
+          onClick={() => listenForThreads(
+            this.state.userId,
+            (id, data) => this.threadAdded(id, data)
+          )}
+        >
+          LISTEN_THREADS
+        </button>
+        <button
+          onClick={() => createThread([
+            'ZNO5s71UJndyFxNu7alLPrVxfro1', 
+            'VhuzOP1UNdT7HN805d6db8eDs1e2',
+          ])}
+        >
+          NEW_THREAD
+        </button>
+        <AppContext.Provider value={{ state: this.state, actions: this.actions }}>
+          <ThreadList ids={this.state.threadIds} />
+          <MessageList />
+        </AppContext.Provider>
+      </div>
+    );
+  }
+}
+export default App;
 
 // example state:
 const sampleState = {
@@ -53,90 +149,3 @@ const sampleState = {
     },
   },
 };
-export const AppContext = new React.createContext();
-
-class App extends Component {
-  state = {
-    userId: '',
-    threadIds: [],
-    threads: {},
-    messages: {},
-  }
-  async login() {
-    const userId = await login();
-    this.setState({
-      userId,
-    });
-  }
-  
-  addThread(id, data) {
-    this.setState({
-      threadIds: this.state.threadIds.concat(id),
-      threads: {
-        ...this.state.threads,
-        [id]: data,
-      },
-    });
-  }
-  addMessage(threadId, messageId, messageData) {
-    console.log(`adding a new message ${messageId} to thread ${threadId}`);
-    this.setState({
-      threads: {
-        ...this.state.threads,
-        [threadId]: {
-          ...this.state.threads[threadId],
-          messageIds: (this.state.threads[threadId].messageIds || []).concat(messageId),
-        },
-      },
-      messages: {
-        ...this.state.messages,
-        [messageId]: messageData,
-      },
-    });
-  }
-
-  render() {
-    return (
-      <div>
-        <AppContext.Provider value={this.state}>
-          <Threads ids={this.state.threadIds} />
-        </AppContext.Provider>
-        <h3>logged in as: {this.state.userId}</h3>
-        <button onClick={() => this.login()}>
-          LOGIN
-        </button>
-        <button
-          onClick={() => listenForMessages(
-            this.state.threadIds[0],
-            (threadId, id, data) => this.addMessage(threadId, id, data),
-          )}
-        >
-          LISTEN_MESSAGES
-        </button>
-        <button
-          onClick={() => listenForThreads(
-            this.state.userId,
-            (id, data) => this.addThread(id, data)
-          )}
-        >
-          LISTEN_THREADS
-        </button>
-        <button
-          onClick={() => createThread([
-            'ZNO5s71UJndyFxNu7alLPrVxfro1', 
-            'VhuzOP1UNdT7HN805d6db8eDs1e2',
-          ])}
-        >
-          NEW_THREAD
-        </button>
-      </div>
-    );
-  }
-}
-export default App;
-
-/* <button
-  onClick={() => getThreads('ZNO5s71UJndyFxNu7alLPrVxfro1')}
->
-  GET_THREADS
-</button> */

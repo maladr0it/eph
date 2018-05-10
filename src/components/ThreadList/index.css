@@ -1,0 +1,6 @@
+.ThreadItem {
+  background: red;
+}
+.ThreadItem.Selected {
+  background: purple;
+}
