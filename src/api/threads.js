@@ -18,10 +18,11 @@ export const createThread = async (memberIds) => {
 // for security reasons
 export const listenForThreads = (userId, onThread) => {
   console.log(`listening for ${userId}'s threads...`);
-  db.ref('threads')
+  db
+    .ref('threads')
     .orderByChild(`members/${userId}`)
     .equalTo(true)
-    .on('child_added', snap => {
+    .on('child_added', (snap) => {
       const id = snap.key;
       const data = snap.val();
       onThread(id, data);
