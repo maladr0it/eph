@@ -1,6 +1,6 @@
 import { THREAD_ADDED } from '../actionTypes';
 
-export const threadAdded = threadId => ({
+export const threadAdded = (threadId, threadData) => ({
   type: THREAD_ADDED,
-  payload: { threadId },
+  payload: { threadId, threadData },
 });

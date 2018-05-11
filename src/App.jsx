@@ -3,25 +3,17 @@
 // PHONE: VhuzOP1UNdT7HN805d6db8eDs1e2
 
 import React from 'react';
-import { createStore, applyMiddleware } from 'redux';
-import { Provider } from 'react-redux';
-import thunkMiddleware from 'redux-thunk';
 
-import rootReducer from './reducers';
 import ControlPanel from './components/ControlPanel';
 import ThreadList from './components/ThreadList';
 // import MessageList from './components/MessageList';
 import './App.css';
 
-const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
-
 const App = () => (
-  <Provider store={store}>
-    <div>
-      <ControlPanel />
-      <ThreadList />
-    </div>
-  </Provider>
+  <div>
+    <ControlPanel />
+    <ThreadList />
+  </div>
 );
 
 export default App;
