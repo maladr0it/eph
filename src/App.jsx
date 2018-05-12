@@ -9,6 +9,7 @@ import { Route } from 'react-router-dom';
 import ControlPanel from './components/ControlPanel';
 import ThreadList from './components/ThreadList';
 import MessageList from './components/MessageList';
+import MessageInput from './components/MessageInput';
 import './App.css';
 
 const App = () => (
@@ -16,6 +17,7 @@ const App = () => (
     <ControlPanel />
     <Route path="/threads" component={ThreadList} />
     <Route path="/threads/:threadId" component={MessageList} />
+    <Route path="/threads/:threadId" component={MessageInput} />
   </div>
 );
 export default App;

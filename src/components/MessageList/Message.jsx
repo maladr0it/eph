@@ -1,22 +1,24 @@
 import React from 'react';
-import { AppContext } from '../../App';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { getMessage } from '../../reducers/messages';
 
 const MessageComponent = ({ author, text }) => (
   <li>
-    <p>AUTHOR: {author || 'NONE'}</p>
-    <p>TEXT: {text || 'NONE'}</p>
+    <p>{author} says:</p>
+    <p>{text}</p>
   </li>
 );
-
-const Message = ({ id }) => (
-  <AppContext.Consumer>
-    {({ state }) => {
-      const { author, text } = state.messages[id];
-      return (
-        <MessageComponent author={author} text={text} />
-      );
-    }}
-  </AppContext.Consumer>
-);
-
+const mapStateToProps = (state, ownProps) => ({
+  ...getMessage(state.messages, ownProps.id),
+});
+const Message = connect(mapStateToProps)(MessageComponent);
 export default Message;
+
+MessageComponent.propTypes = {
+  author: PropTypes.string.isRequired,
+  text: PropTypes.string,
+};
+MessageComponent.defaultProps = {
+  text: 'NO_TEXT',
+};

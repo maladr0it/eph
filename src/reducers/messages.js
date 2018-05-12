@@ -31,3 +31,5 @@ const messages = (state = initialState, action) => {
   }
 };
 export default messages;
+
+export const getMessage = (state, id) => state[id];

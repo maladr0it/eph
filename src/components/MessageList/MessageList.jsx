@@ -1,22 +1,23 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-// import Message from './Message';
+import Message from './Message';
 
 import { getMessageIdsByThread } from '../../reducers/threads';
 
 const MessageListComponent = ({ threadId, messageIds }) => (
   <div>
-    <p>SELECTED THREAD: {threadId}</p>
-    <p>MESSAGES:</p>
-    <ul>{messageIds.map(id => <li key={id}>{id}</li>)}</ul>
+    <h3>selected thread: {threadId}</h3>
+    <ul>{messageIds.map(id => <Message key={id} id={id} />)}</ul>
   </div>
 );
+// <div>
+//   <p>SELECTED THREAD: {threadId}</p>
+//   <p>MESSAGES:</p>
+//   <ul>{messageIds.map(id => <li key={id}>{id}</li>)}</ul>
+// </div>
 const mapStateToProps = (state, ownProps) => {
-  // const threadId = state.router.location.pathname;
   const { threadId } = ownProps.match.params;
-  console.log('threadId is:', threadId);
-  console.log(ownProps);
   return {
     threadId,
     messageIds: getMessageIdsByThread(state.threads, threadId),
