@@ -8,15 +8,13 @@ import Thread from './Thread';
 const ThreadListComponent = ({ ids }) => (
   <div>
     THREAD LIST:
-    <ul>{ids.map(id => <Thread id={id} />)}</ul>
+    <ul>{ids.map(id => <Thread key={id} id={id} />)}</ul>
   </div>
 );
-
 const mapStateToProps = state => ({
   ids: state.threadIds, // TODO: replace with a selector
 });
 const ThreadList = connect(mapStateToProps)(ThreadListComponent);
-
 export default ThreadList;
 
 ThreadListComponent.propTypes = {

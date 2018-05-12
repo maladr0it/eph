@@ -1,3 +1,5 @@
+import { push } from 'react-router-redux';
+
 import { loggedIn } from './user';
 import { threadAdded } from './threads';
 import { messageAdded } from './messages';
@@ -6,6 +8,7 @@ import * as api from '../api';
 
 // Thunks here
 // TODO: consider sagas for follow-on effects of actions
+// TODO: consider file structure
 
 const onMessage = (threadId, messageId, messageData) => (dispatch) => {
   console.log(`adding message ${messageId} to ${threadId}`);
@@ -25,4 +28,7 @@ export const login = () => async (dispatch) => {
   // once logged in, listen for user's threads
   api.listenForThreads(userId, (id, data) => dispatch(onThread(id, data)));
   dispatch(loggedIn(userId));
+};
+export const selectThread = threadId => async (dispatch) => {
+  dispatch(push(`/${threadId}`));
 };

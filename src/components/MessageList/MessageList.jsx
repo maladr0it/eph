@@ -1,26 +1,28 @@
 import React from 'react';
-import { AppContext } from '../../App';
-import Message from './Message';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+// import Message from './Message';
 
-const MessageListComponent = ({ messageIds }) => console.log(messageIds) ||
-(
-  <ul>
-    {messageIds.map(id => (
-      <Message key={id} id={id} />
-    ))}
-  </ul>
+import { getMessageIdsByThread } from '../../reducers/threads';
+
+const MessageListComponent = ({ threadId, messageIds }) => (
+  <div>
+    <p>SELECTED THREAD: {threadId}</p>
+    <p>MESSAGES:</p>
+    <ul>{messageIds.map(id => <li key={id}>{id}</li>)}</ul>
+  </div>
 );
-
-const MessageList = ({ threadId }) => (
-  <AppContext.Consumer>
-    {({ state }) => {
-      // TODO: replace this with a selector
-      const { messageIds = [] } = state.threads[threadId] || { messageIds: [] };
-      return (
-        <MessageListComponent messageIds={messageIds} />
-      );
-    }}
-  </AppContext.Consumer>
-);
-
+const mapStateToProps = (state, ownProps) => {
+  const { threadId } = ownProps.match.params;
+  return {
+    threadId,
+    messageIds: getMessageIdsByThread(threadId),
+  };
+};
+const MessageList = connect(mapStateToProps)(MessageListComponent);
 export default MessageList;
+
+MessageListComponent.propTypes = {
+  threadId: PropTypes.string.isRequired,
+  messageIds: PropTypes.arrayOf(PropTypes.string).isRequired,
+};

@@ -1,6 +1,8 @@
 import { LOGGED_IN } from '../actionTypes';
 
-const initialState = {};
+const initialState = {
+  userId: null,
+};
 
 const user = (state = initialState, action) => {
   switch (action.type) {

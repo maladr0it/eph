@@ -58,3 +58,6 @@ const threads = (state = initialState, action) => {
   }
 };
 export default threads;
+
+export const getMessageIdsByThread = (state, threadId) =>
+  (state[threadId] && state[threadId].messageIds) || [];
