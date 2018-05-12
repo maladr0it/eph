@@ -1,6 +1,6 @@
 import { MESSAGE_ADDED } from '../actionTypes';
 
-export const messageAdded = (messageId, messageData) => ({
+export const messageAdded = (threadId, messageId, messageData) => ({
   type: MESSAGE_ADDED,
-  payload: { messageId, messageData },
+  payload: { threadId, messageId, messageData },
 });

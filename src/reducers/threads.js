@@ -12,39 +12,46 @@ import { THREAD_ADDED, MESSAGE_ADDED } from '../actionTypes';
 //   },
 // };
 
-// overkill for now
-// const messageIds = (state = [], action) => {
-//   switch (action.type) {
-//     case MESSAGE_ADDED: {
-//       const { messageId } = action.payload;
-//       return state.concat(messageId);
-//     }
-//     default:
-//       return state;
-//   }
-// };
+const defaultThread = {
+  messageIds: [],
+};
+const thread = (state = defaultThread, action) => {
+  switch (action.type) {
+    case THREAD_ADDED: {
+      const { threadData } = action.payload;
+      return {
+        ...state,
+        ...threadData,
+      };
+    }
+    case MESSAGE_ADDED: {
+      const { messageId } = action.payload;
+      return {
+        ...state,
+        messageIds: state.messageIds.concat(messageId),
+      };
+    }
+    default:
+      return state;
+  }
+};
 
 const initialState = {};
 const threads = (state = initialState, action) => {
   switch (action.type) {
     case THREAD_ADDED: {
-      const { threadId, threadData } = action.payload;
+      const { threadId } = action.payload;
       return {
         ...state,
-        [threadId]: threadData,
+        [threadId]: thread(state[threadId], action),
       };
     }
     case MESSAGE_ADDED: {
-      const { threadId, messageId } = action.payload;
-      return state;
-      // return {
-      //   ...state,
-      //   [threadId]: {
-      //     ...state[threadId],
-      //     // TODO: insert this safely using lenses or lodash set()
-      //     messageIds: state[threadId].messageIds.concat(messageId),
-      //   },
-      // };
+      const { threadId } = action.payload;
+      return {
+        ...state,
+        [threadId]: thread(state[threadId], action),
+      };
     }
     default:
       return state;

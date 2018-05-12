@@ -9,24 +9,19 @@ import * as api from '../api';
 
 const onMessage = (threadId, messageId, messageData) => (dispatch) => {
   console.log(`adding message ${messageId} to ${threadId}`);
-  dispatch(messageAdded(messageId, messageData));
+  dispatch(messageAdded(threadId, messageId, messageData));
 };
-
 const onThread = (threadId, threadData) => (dispatch) => {
   console.log(`adding thread ${threadId}`);
   dispatch(threadAdded(threadId, threadData));
-
   // when a thread is loaded, listen for its messages
   api.listenForMessages(threadId, (id, data) => dispatch(onMessage(threadId, id, data)));
 };
-
 export const createThread = memberIds => async () => {
   api.createThread(memberIds);
 };
-
 export const login = () => async (dispatch) => {
   const userId = await api.login();
-
   // once logged in, listen for user's threads
   api.listenForThreads(userId, (id, data) => dispatch(onThread(id, data)));
   dispatch(loggedIn(userId));
