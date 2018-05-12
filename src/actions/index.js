@@ -29,6 +29,3 @@ export const login = () => async (dispatch) => {
   api.listenForThreads(userId, (id, data) => dispatch(onThread(id, data)));
   dispatch(loggedIn(userId));
 };
-export const selectThread = threadId => async (dispatch) => {
-  dispatch(push(`/${threadId}`));
-};

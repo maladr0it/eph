@@ -13,10 +13,13 @@ const MessageListComponent = ({ threadId, messageIds }) => (
   </div>
 );
 const mapStateToProps = (state, ownProps) => {
+  // const threadId = state.router.location.pathname;
   const { threadId } = ownProps.match.params;
+  console.log('threadId is:', threadId);
+  console.log(ownProps);
   return {
     threadId,
-    messageIds: getMessageIdsByThread(threadId),
+    messageIds: getMessageIdsByThread(state.threads, threadId),
   };
 };
 const MessageList = connect(mapStateToProps)(MessageListComponent);
