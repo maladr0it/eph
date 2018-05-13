@@ -11,13 +11,8 @@ const MessageListComponent = ({ threadId, messageIds }) => (
     <ul>{messageIds.map(id => <Message key={id} id={id} />)}</ul>
   </div>
 );
-// <div>
-//   <p>SELECTED THREAD: {threadId}</p>
-//   <p>MESSAGES:</p>
-//   <ul>{messageIds.map(id => <li key={id}>{id}</li>)}</ul>
-// </div>
 const mapStateToProps = (state, ownProps) => {
-  const { threadId } = ownProps.match.params;
+  const { threadId } = ownProps;
   return {
     threadId,
     messageIds: getMessageIdsByThread(state.threads, threadId),

@@ -7,13 +7,16 @@ export const createThread = async (memberIds) => {
     acc[id] = true;
     return acc;
   }, {});
-  const ref = await db.ref('threads').push({
+  const active = memberIds.reduce((acc, id) => {
+    // TODO DB: should be flat
+    acc[id] = { active: true };
+    return acc;
+  }, {});
+  db.ref('threads').push({
     members,
+    active,
   });
-  console.log(ref.key);
-  return ref.key;
 };
-
 // TODO: should use a token instead of userId
 // for security reasons
 export const listenForThreads = (userId, onThread) => {

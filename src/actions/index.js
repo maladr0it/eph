@@ -1,5 +1,3 @@
-import { push } from 'react-router-redux';
-
 import { loggedIn } from './user';
 import { threadAdded } from './threads';
 import { messageAdded } from './messages';
@@ -22,6 +20,9 @@ const onThread = (threadId, threadData) => (dispatch) => {
 };
 export const createThread = memberIds => async () => {
   api.createThread(memberIds);
+};
+export const sendMessage = (threadId, author, text) => async () => {
+  api.createMessage(threadId, author, text);
 };
 export const login = () => async (dispatch) => {
   const userId = await api.login();
