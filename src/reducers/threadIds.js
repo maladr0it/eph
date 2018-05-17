@@ -1,4 +1,4 @@
-import { THREAD_ADDED, THREAD_REMOVED, THREADS_UPDATED } from '../actionTypes';
+import { THREAD_ADDED, THREAD_REMOVED, THREADS_REORDERED, THREADS_UPDATED } from '../actionTypes';
 
 // sample state
 // const state = [
@@ -23,6 +23,10 @@ const threadIds = (state = initialState, action) => {
         newIds.splice(index, 1);
       }
       return newIds;
+    }
+    case THREADS_REORDERED: {
+      const { newOrder } = action.payload;
+      return newOrder;
     }
     case THREADS_UPDATED: {
       return action.payload.threadIds;

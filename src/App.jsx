@@ -15,7 +15,7 @@ import './App.css';
 const App = () => (
   <div>
     <ControlPanel />
-    <Route path="/threads" component={ThreadList} />
+    <Route path="/threads" exact component={ThreadList} />
     <Route path="/threads/:threadId/" component={ThreadView} />
   </div>
 );
