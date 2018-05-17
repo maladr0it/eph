@@ -1,3 +1,6 @@
 export const LOGGED_IN = 'LOGGED_IN';
 export const THREAD_ADDED = 'THREAD_ADDED';
+export const THREAD_REMOVED = 'THREAD_REMOVED';
+export const THREAD_MODIFIED = 'THREAD_MODIFIED';
+export const THREADS_UPDATED = 'THREADS_UPDATED';
 export const MESSAGE_ADDED = 'MESSAGE_ADDED';

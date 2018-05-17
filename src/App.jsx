@@ -12,14 +12,6 @@ import ThreadList from './components/ThreadList';
 import ThreadView from './components/ThreadView';
 import './App.css';
 
-// for auto-login
-// class App extends React.Component {
-//   componentDidMount() {
-
-//   }
-
-// }
-
 const App = () => (
   <div>
     <ControlPanel />

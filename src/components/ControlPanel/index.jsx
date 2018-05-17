@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 
 import { login, createThread } from '../../actions';
 
-// PC:    ZNO5s71UJndyFxNu7alLPrVxfro1
-// PHONE: VhuzOP1UNdT7HN805d6db8eDs1e2
-// KAT:   xBqWv4oygUWkZQiJxrn82FUa3F02
+// PC:        ZNO5s71UJndyFxNu7alLPrVxfro1
+// PHONE:     VhuzOP1UNdT7HN805d6db8eDs1e2
+// KAT:       xBqWv4oygUWkZQiJxrn82FUa3F02
 
 const ControlPanelComponent = ({ userId, handleLogin, handleCreateThread }) => (
   <div>
@@ -13,7 +13,7 @@ const ControlPanelComponent = ({ userId, handleLogin, handleCreateThread }) => (
     <button onClick={() => handleLogin()}>LOGIN</button>
     <button
       onClick={() =>
-        handleCreateThread(['ZNO5s71UJndyFxNu7alLPrVxfro1', 'xBqWv4oygUWkZQiJxrn82FUa3F02'])
+        handleCreateThread(['ZNO5s71UJndyFxNu7alLPrVxfro1', 'VhuzOP1UNdT7HN805d6db8eDs1e2'])
       }
     >
       NEW_THREAD

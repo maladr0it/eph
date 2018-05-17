@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Message from './Message';
 
-import { getMessageIdsByThread } from '../../reducers/threads';
+import { getMessageIdsByThread } from '../../reducers/messageIds';
 
 const MessageListComponent = ({ threadId, messageIds }) => (
   <div>
@@ -15,7 +15,7 @@ const mapStateToProps = (state, ownProps) => {
   const { threadId } = ownProps;
   return {
     threadId,
-    messageIds: getMessageIdsByThread(state.threads, threadId),
+    messageIds: getMessageIdsByThread(state.messageIds, threadId),
   };
 };
 const MessageList = connect(mapStateToProps)(MessageListComponent);

@@ -36,13 +36,13 @@ const getInactiveMembers = async (threadId) => {
 export const createMessage = async (threadId, author, text) => {
   console.log(`adding message ${text} to thread ${threadId}`);
   const serverTime = await getServerTime();
-  const inactiveMembers = await getInactiveMembers(threadId);
-  console.log('inactive members are:', inactiveMembers);
+  // const inactiveMembers = await getInactiveMembers(threadId);
+  // console.log('inactive members are:', inactiveMembers);
 
-  inactiveMembers.forEach((id) => {
-    // console.log(`updating thread ${threadId}'s unread count for user ${id}`);
-    db.ref(`threads/${threadId}/unread/${id}`).transaction(count => (count || 0) + 1);
-  });
+  // inactiveMembers.forEach((id) => {
+  //   // console.log(`updating thread ${threadId}'s unread count for user ${id}`);
+  //   db.ref(`threads/${threadId}/unread/${id}`).transaction(count => (count || 0) + 1);
+  // });
 
   // update specific fields
   // const unreadUpdates = inactiveMembers.reduce((acc, id) => {

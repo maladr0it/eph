@@ -1,4 +1,4 @@
-import { THREAD_ADDED, MESSAGE_ADDED } from '../actionTypes';
+import { THREADS_UPDATED, THREAD_ADDED, THREAD_MODIFIED, THREAD_REMOVED } from '../actionTypes';
 
 // sample state
 // const state = {
@@ -12,45 +12,33 @@ import { THREAD_ADDED, MESSAGE_ADDED } from '../actionTypes';
 //   },
 // };
 
-const defaultThread = {
-  messageIds: [],
-};
-const thread = (state = defaultThread, action) => {
-  switch (action.type) {
-    case THREAD_ADDED: {
-      const { threadData } = action.payload;
-      return {
-        ...state,
-        ...threadData,
-      };
-    }
-    case MESSAGE_ADDED: {
-      const { messageId } = action.payload;
-      return {
-        ...state,
-        messageIds: state.messageIds.concat(messageId),
-      };
-    }
-    default:
-      return state;
-  }
-};
-
 const initialState = {};
 const threads = (state = initialState, action) => {
   switch (action.type) {
     case THREAD_ADDED: {
-      const { threadId } = action.payload;
+      const { threadId, threadData } = action.payload;
       return {
         ...state,
-        [threadId]: thread(state[threadId], action),
+        [threadId]: threadData,
       };
     }
-    case MESSAGE_ADDED: {
+    case THREAD_REMOVED: {
       const { threadId } = action.payload;
+      const newState = { ...state };
+      delete newState[threadId];
+      return newState;
+    }
+    case THREAD_MODIFIED: {
+      const { threadId, threadData } = action.payload;
       return {
         ...state,
-        [threadId]: thread(state[threadId], action),
+        [threadId]: threadData,
+      };
+    }
+    case THREADS_UPDATED: {
+      const { threadsData } = action.payload;
+      return {
+        ...threadsData,
       };
     }
     default:
@@ -59,5 +47,26 @@ const threads = (state = initialState, action) => {
 };
 export default threads;
 
-export const getMessageIdsByThread = (state, threadId) =>
-  (state[threadId] && state[threadId].messageIds) || [];
+// const defaultThread = {
+//   messageIds: [],
+// };
+// const thread = (state = defaultThread, action) => {
+//   switch (action.type) {
+//     case THREAD_ADDED: {
+//       const { threadData } = action.payload;
+//       return {
+//         ...state,
+//         ...threadData,
+//       };
+//     }
+//     case MESSAGE_ADDED: {
+//       const { messageId } = action.payload;
+//       return {
+//         ...state,
+//         messageIds: state.messageIds.concat(messageId),
+//       };
+//     }
+//     default:
+//       return state;
+//   }
+// };

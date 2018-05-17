@@ -17,26 +17,35 @@ export const createThread = async (memberIds) => {
     active,
   });
 };
-// TODO: should use a token instead of userId
-// for security reasons
-export const listenForThreads = (userId, onThread) => {
-  console.log(`listening for ${userId}'s threads...`);
-  return db
-    .ref('threads')
-    .child('members')
-    .child(userId)
-    .on('value', (snap) => {
-      const id = snap.key;
-      const data = snap.val();
-      onThread(id, data);
-    });
+export const listenToThreads = (userId, onThread) => {
+  const threadsRef = db.ref('threads').orderByChild(`members/${userId}`);
+  threadsRef.on('child_added', (snap) => {
+    onThread('added', snap.key, snap.val());
+  });
+  threadsRef.on('child_removed', (snap) => {
+    onThread('removed', snap.key, snap.val());
+  });
+  threadsRef.on('child_changed', (snap) => {
+    onThread('modified', snap.key, snap.val());
+  });
 };
+// listen for new threads
+// threadsRef.on('child_added', (snap) => {
+//   console.log('thread added:', snap.val());
+//   const id = snap.key;
+//   const data = snap.val();
+//   onThread(id, data);
+// });
 
-// export const getThreads = async (userId) => {
-//   const snap = await db.ref('threads')
-//   .orderByChild(`members/${userId}`)
-//   .equalTo(true)
-//   .once('value');
+// export const listenToThreads2 = (userId, onThread) => {
+//   // console.log(`listening for ${userId}'s threads...`);
+//   const threadsRef = db.ref('threads').orderByChild(`members/${userId}`);
 
-//   console.log(snap.val());
+//   threadsRef.on('value', (snap) => {
+//     console.log('threads list updated:', snap.val());
+//     // create a list of ids sorted by 'updated'
+//     const data = snap.val();
+//     const ids = Object.keys(data).sort((a, b) => data[a].updated > data[b].updated);
+//     onThread(ids, data);
+//   });
 // };
