@@ -1,10 +1,4 @@
-import {
-  THREAD_ADDED,
-  THREAD_REMOVED,
-  THREAD_MODIFIED,
-  THREADS_REORDERED,
-  THREADS_UPDATED,
-} from '../actionTypes';
+import { THREAD_ADDED, THREAD_REMOVED, THREAD_MODIFIED, THREADS_REORDERED } from '../actionTypes';
 
 export const threadAdded = (threadId, threadData) => ({
   type: THREAD_ADDED,
@@ -21,8 +15,4 @@ export const threadModified = (threadId, threadData) => ({
 export const threadsReordered = newOrder => ({
   type: THREADS_REORDERED,
   payload: { newOrder },
-});
-export const threadsUpdated = (threadIds, threadsData) => ({
-  type: THREADS_UPDATED,
-  payload: { threadIds, threadsData },
 });

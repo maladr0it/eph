@@ -25,43 +25,30 @@ export const listenForMessages = (threadId, onMessage) => {
     });
 };
 // TODO: this should probably be done via cloud function
+// TODO: db should be flattened here
 const getInactiveMembers = async (threadId) => {
   const ref = await db.ref(`threads/${threadId}/active`).once('value');
   const activeStatus = ref.val();
-  console.log('activeStatus:', activeStatus);
   const inactiveMembers = Object.keys(activeStatus).filter(id => activeStatus[id].active === false);
   return inactiveMembers;
 };
 
 export const createMessage = async (threadId, author, text) => {
-  console.log(`adding message ${text} to thread ${threadId}`);
   const serverTime = await getServerTime();
-  // const inactiveMembers = await getInactiveMembers(threadId);
-  // console.log('inactive members are:', inactiveMembers);
-
-  // inactiveMembers.forEach((id) => {
-  //   // console.log(`updating thread ${threadId}'s unread count for user ${id}`);
-  //   db.ref(`threads/${threadId}/unread/${id}`).transaction(count => (count || 0) + 1);
-  // });
-
-  // update specific fields
-  // const unreadUpdates = inactiveMembers.reduce((acc, id) => {
-  //   acc[`threads/${threadId}/unread/${id}`] = 'TEST';
-  //   return acc;
-  // }, {});
-
-  // test transactions
-  // db.ref(`threads/${threadId}/testCount`).transaction(count => (count || 0) + 1);
-
-  // changing labels to conform with server
-  db.ref(`messages/${threadId}`).push({
+  const updates = {};
+  // create message
+  const messageId = await db.ref(`messages/${threadId}`).push().key;
+  updates[`messages/${threadId}/${messageId}`] = {
     author,
     message: text,
     created: serverTime,
-    // created: firebase.database.ServerValue.TIMESTAMP,
-  });
-  db.ref(`threads/${threadId}`).update({
-    lastMessage: text,
-    updated: serverTime,
+  };
+  updates[`threads/${threadId}/lastMessage`] = text;
+  updates[`threads/${threadId}/updated`] = serverTime;
+  db.ref().update(updates);
+  // increase unread counts
+  const inactiveMembers = await getInactiveMembers(threadId);
+  inactiveMembers.forEach((id) => {
+    db.ref(`threads/${threadId}/unread/${id}`).transaction(count => (count || 0) + 1);
   });
 };
