@@ -1,6 +1,14 @@
 import firebase from './firebase';
+import { getEmoji } from '../utils/emoji';
 
 const db = firebase.database();
+
+// TODO: put this in some shared file (api/index.js ?)
+const getServerTime = async () => {
+  const snapshot = await db.ref('.info/serverTimeOffset').once('value');
+  const offset = snapshot.val() || 0;
+  return new Date(Date.now() + offset).toISOString();
+};
 
 export const setActive = async (threadId, userId, active) => {
   if (!userId) {
@@ -24,6 +32,7 @@ export const createThread = async (memberIds) => {
       acc.active[id] = { active: false }; // TODO: flatten on db-side
       acc.unread[id] = 0;
       acc.authoring[id] = false;
+      acc.emoji[id] = getEmoji();
       return acc;
     },
     {
@@ -31,9 +40,13 @@ export const createThread = async (memberIds) => {
       active: {},
       unread: {},
       authoring: {},
+      emoji: {},
     },
   );
-  db.ref('threads').push({ ...memberMeta });
+  db.ref('threads').push({
+    ...memberMeta,
+    updated: await getServerTime(),
+  });
 };
 export const listenToThreads = (userId, onThread) => {
   const threadsRef = db.ref('threads').orderByChild(`members/${userId}`);

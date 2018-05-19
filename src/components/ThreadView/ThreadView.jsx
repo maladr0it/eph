@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import MessageList from './MessageList';
@@ -13,16 +14,17 @@ import { threadActive, threadInactive } from '../../actions';
 
 class ThreadViewComponent extends React.Component {
   componentDidMount() {
+    console.log('mounting...');
     this.props.handleThreadActive(this.props.match.params.threadId, this.props.userId);
   }
-  componentWillUnmount() {
-    this.props.handleThreadInactive(this.props.match.params.threadId, this.props.userId);
-  }
   // PUT LOGIC HERE MOST LIKELY
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps) {
     console.log('>>>');
     console.log('prevProps:', prevProps);
     console.log('props:', this.props);
+  }
+  componentWillUnmount() {
+    this.props.handleThreadInactive(this.props.match.params.threadId, this.props.userId);
   }
   render() {
     const { threadId } = this.props.match.params;
@@ -36,7 +38,7 @@ class ThreadViewComponent extends React.Component {
     );
   }
 }
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = state => ({
   userId: state.user.userId,
 });
 const mapDispatchToProps = {
@@ -45,3 +47,8 @@ const mapDispatchToProps = {
 };
 const ThreadView = connect(mapStateToProps, mapDispatchToProps)(ThreadViewComponent);
 export default ThreadView;
+
+ThreadViewComponent.propTypes = {
+  handleThreadActive: PropTypes.func.isRequired,
+  handleThreadInactive: PropTypes.func.isRequired,
+};
