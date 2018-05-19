@@ -42,3 +42,7 @@ const threads = (state = initialState, action) => {
 export default threads;
 
 export const getThread = (state, threadId) => state[threadId];
+
+// TODO: ew. replace with lenses or lodash get()
+export const getUnread = (state, threadId, userId) =>
+  state[threadId] && state[threadId].unread && state[threadId].unread[userId];

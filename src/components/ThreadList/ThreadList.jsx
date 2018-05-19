@@ -8,13 +8,12 @@ import Thread from './Thread';
 const ThreadListComponent = ({ ids }) => (
   <div>
     THREAD LIST:
-    <ul>{ids.map(id => <Thread key={id} id={id} />)}</ul>
+    <ul>{ids.map(id => <Thread key={id} threadId={id} />)}</ul>
   </div>
 );
-const mapStateToProps = state =>
-  console.log('updating threadIds....') || {
-    ids: state.threadIds, // TODO: replace with a selector
-  };
+const mapStateToProps = state => ({
+  ids: state.threadIds, // TODO: replace with a selector
+});
 const ThreadList = connect(mapStateToProps)(ThreadListComponent);
 export default ThreadList;
 

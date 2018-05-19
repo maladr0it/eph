@@ -27,6 +27,7 @@ const onThread = (changeType, threadId, threadData) => (dispatch, getState) => {
     console.log(`adding thread ${threadId}`);
     dispatch(threadAdded(threadId, threadData));
     // when a thread is loaded, listen for its messages
+    // could be added to threadView lifecycle method instead
     api.listenForMessages(threadId, (id, data) => dispatch(onMessage(threadId, id, data)));
   }
   if (changeType === 'removed') {
@@ -48,6 +49,14 @@ const onThread = (changeType, threadId, threadData) => (dispatch, getState) => {
 export const createThread = memberIds => async () => {
   api.createThread(memberIds);
 };
+// TODO: consider moving more specific thunks to their respective files
+export const threadActive = (threadId, userId) => async () => {
+  api.setActive(threadId, userId, true);
+  api.clearUnread(threadId, userId);
+};
+export const threadInactive = (threadId, userId) => async () => {
+  api.setActive(threadId, userId, false);
+};
 export const sendMessage = (threadId, author, text) => async () => {
   api.createMessage(threadId, author, text);
 };
@@ -57,10 +66,3 @@ export const login = () => async (dispatch) => {
   api.listenToThreads(userId, (changeType, id, data) => dispatch(onThread(changeType, id, data)));
   dispatch(loggedIn(userId));
 };
-
-// const onThreadsUpdate = (threadIds, threadsData) => (dispatch) => {
-//   dispatch(threadsUpdated(threadIds, threadsData));
-// };
-
-// api.listenToThreads(userId, (threadIds, threadsData) =>
-//   dispatch(onThreadsUpdate(threadIds, threadsData)));

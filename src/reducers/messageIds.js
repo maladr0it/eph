@@ -1,4 +1,4 @@
-import { MESSAGE_ADDED } from '../actionTypes';
+import { MESSAGE_ADDED, THREAD_REMOVED } from '../actionTypes';
 
 // sample state
 // const state = {
@@ -20,6 +20,12 @@ const messageIds = (state = initialState, action) => {
         ...state,
         [threadId]: (state[threadId] || []).concat(messageId),
       };
+    }
+    case THREAD_REMOVED: {
+      const { threadId } = action.payload;
+      const newState = { ...state };
+      delete newState[threadId];
+      return newState;
     }
     default:
       return state;

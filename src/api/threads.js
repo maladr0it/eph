@@ -2,6 +2,20 @@ import firebase from './firebase';
 
 const db = firebase.database();
 
+export const setActive = async (threadId, userId, active) => {
+  if (!userId) {
+    return;
+  }
+  // TODO: flatten DB here
+  db.ref(`threads/${threadId}/active/${userId}/active`).set(active);
+};
+export const clearUnread = async (threadId, userId) => {
+  if (!userId) {
+    return;
+  }
+  db.ref(`threads/${threadId}/unread/${userId}`).transaction(() => 0);
+};
+
 export const createThread = async (memberIds) => {
   // TODO: replace with an update? maybe requires 2 server hits
   const memberMeta = memberIds.reduce(
