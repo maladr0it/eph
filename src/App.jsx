@@ -15,7 +15,7 @@ import ThreadView from './components/ThreadView';
 import './App.css';
 
 const App = () => (
-  <div>
+  <div className="App">
     <ControlPanel />
     <Route path="/threads" exact component={ThreadList} />
     <Route path="/threads/:threadId/" component={ThreadView} />

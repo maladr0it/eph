@@ -46,3 +46,9 @@ export const getThread = (state, threadId) => state[threadId];
 // TODO: ew. replace with lenses or lodash get()
 export const getUnread = (state, threadId, userId) =>
   state[threadId] && state[threadId].unread && state[threadId].unread[userId];
+
+// TODO: this actually gets your emoji, in accordance to the phone app's behaviour
+export const getPartnerEmoji = (state, threadId, userId) =>
+  state[threadId] && state[threadId].emoji && state[threadId].emoji[userId];
+// const partnerId = Object.keys(emojiDict).filter(id => id !== userId);
+// return emojiDict[partnerId];

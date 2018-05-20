@@ -8,20 +8,15 @@ import MessageInput from './MessageInput';
 import ThreadDetail from './ThreadDetail';
 
 import { threadActive, threadInactive } from '../../actions';
+import './index.css';
 
 // attach lifecycle methods to listen for thread change
 // on mount, set active
 
 class ThreadViewComponent extends React.Component {
+  // TODO: consider putting listeners in componentDidUpdate
   componentDidMount() {
-    console.log('mounting...');
     this.props.handleThreadActive(this.props.match.params.threadId, this.props.userId);
-  }
-  // PUT LOGIC HERE MOST LIKELY
-  componentDidUpdate(prevProps) {
-    console.log('>>>');
-    console.log('prevProps:', prevProps);
-    console.log('props:', this.props);
   }
   componentWillUnmount() {
     this.props.handleThreadInactive(this.props.match.params.threadId, this.props.userId);
@@ -29,7 +24,7 @@ class ThreadViewComponent extends React.Component {
   render() {
     const { threadId } = this.props.match.params;
     return (
-      <div>
+      <div className="ThreadView">
         <Link to="/threads">BACK</Link>
         <ThreadDetail threadId={threadId} />
         <MessageList threadId={threadId} />

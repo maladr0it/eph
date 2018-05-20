@@ -3,10 +3,11 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import Thread from './Thread';
+import './index.css';
 
 // TODO: change to pureComponent
 const ThreadListComponent = ({ ids }) => (
-  <div>
+  <div className="ThreadList">
     THREAD LIST:
     <ul>{ids.map(id => <Thread key={id} threadId={id} />)}</ul>
   </div>

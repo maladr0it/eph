@@ -24,7 +24,7 @@ class MessageInputComponent extends React.Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <input type="text" value={this.state.value} onChange={this.handleChange} />
+        <input autoFocus type="text" value={this.state.value} onChange={this.handleChange} />
         <input type="submit" />
       </form>
     );
@@ -44,6 +44,3 @@ MessageInputComponent.propTypes = {
   userId: PropTypes.string.isRequired,
   handleSend: PropTypes.func.isRequired,
 };
-// MessageInputComponent.defaultProps = {
-
-// };

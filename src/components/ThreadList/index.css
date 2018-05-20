@@ -1,6 +1,5 @@
-.ThreadItem {
-  background: red;
-}
-.ThreadItem.Selected {
-  background: purple;
+.ThreadList {
+  flex-grow: 1;
+  overflow-y: auto;
+  background: orange;
 }

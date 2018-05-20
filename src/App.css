@@ -1,5 +1,7 @@
-.Panes {
-  background: yellow;
+.App {
   display: flex;
-  align-items: space-around;
+  flex-direction: column;
+  background: yellow;
+  height: 100vh;
+  overflow: scroll;
 }

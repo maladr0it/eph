@@ -4,9 +4,10 @@ import PropTypes from 'prop-types';
 import Message from './Message';
 
 import { getMessageIdsByThread } from '../../reducers/messageIds';
+import './index.css';
 
 const MessageListComponent = ({ messageIds }) => (
-  <div>
+  <div className="MessageList">
     <ul>{messageIds.map(id => <Message key={id} id={id} />)}</ul>
   </div>
 );
