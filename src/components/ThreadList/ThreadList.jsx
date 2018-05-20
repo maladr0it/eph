@@ -8,7 +8,6 @@ import './index.css';
 // TODO: change to pureComponent
 const ThreadListComponent = ({ ids }) => (
   <div className="ThreadList">
-    THREAD LIST:
     <ul>{ids.map(id => <Thread key={id} threadId={id} />)}</ul>
   </div>
 );

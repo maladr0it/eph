@@ -6,21 +6,29 @@ import { withRouter } from 'react-router';
 
 import { getThread, getUnread, getPartnerEmoji } from '../../reducers/threads';
 import Emoji from '../Emoji';
+import UnreadBadge from './UnreadBadge';
 import './index.css';
 
 const ThreadComponent = ({
   threadId, unread, lastMessage, partnerEmoji, match,
-}) => (
-  <li>
-    <p>ID: {threadId}</p>
-    <p>
-      <Emoji name={partnerEmoji} />
-    </p>
-    <p>UNREAD: {unread}</p>
-    <p>lastMessage: {lastMessage}</p>
-    <Link to={`${match.url}/${threadId}`}>SELECT</Link>
-  </li>
-);
+}) => {
+  const unreadClass = unread ? 'Unread' : '';
+  return (
+    <li className={`Thread ${unreadClass}`}>
+      <Link to={`${match.url}/${threadId}`}>
+        <div className="ThreadInfo">
+          <div>
+            <Emoji name={partnerEmoji} />
+          </div>
+          <div className="LastMessage">{lastMessage}</div>
+          {unread > 0 && <UnreadBadge count={unread} />}
+        </div>
+      </Link>
+      {/* <p>UNREAD: {unread}</p> */}
+      {/* <p>lastMessage: {lastMessage}</p> */}
+    </li>
+  );
+};
 const mapStateToProps = (state, ownProps) => {
   const thread = getThread(state.threads, ownProps.threadId);
   if (!thread) {
@@ -39,10 +47,9 @@ export default Thread;
 ThreadComponent.propTypes = {
   threadId: PropTypes.string.isRequired,
   lastMessage: PropTypes.string,
-  unread: PropTypes.number,
+  unread: PropTypes.number.isRequired,
   partnerEmoji: PropTypes.string.isRequired,
 };
 ThreadComponent.defaultProps = {
   lastMessage: 'NONE',
-  unread: 'NONE',
 };

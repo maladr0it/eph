@@ -6,7 +6,34 @@
 }
 
 .MessageList {
-  background: red;
   flex-grow: 1;
   overflow-y: auto;
+}
+
+.MessageContainer {
+  display: flex;
+  margin: 1rem;
+}
+.MessageContainer.You {
+  justify-content: flex-end;
+}
+
+.Message {
+  background: #eeeeee;
+  padding: 1.5rem;
+}
+.Message.You {
+  color: white;
+  background: royalblue;
+}
+
+/* .Message.You {
+  background: royalblue;
+  color: white;
+} */
+
+.Message .Content {
+  margin: 0.5rem;
+  /* width: fit-content; */
+  background: red;
 }

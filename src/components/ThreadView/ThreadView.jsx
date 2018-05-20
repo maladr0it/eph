@@ -24,12 +24,14 @@ class ThreadViewComponent extends React.Component {
   render() {
     const { threadId } = this.props.match.params;
     return (
-      <div className="ThreadView">
-        <Link to="/threads">BACK</Link>
-        <ThreadDetail threadId={threadId} />
-        <MessageList threadId={threadId} />
-        <MessageInput threadId={threadId} />
-      </div>
+      <React.Fragment>
+        <div className="ThreadView">
+          <Link to="/threads">BACK</Link>
+          <ThreadDetail threadId={threadId} />
+          <MessageList threadId={threadId} />
+          <MessageInput threadId={threadId} />
+        </div>
+      </React.Fragment>
     );
   }
 }

@@ -48,9 +48,15 @@ export const createThread = async (memberIds) => {
     updated: await getServerTime(),
   });
 };
+// TODO: DANGER! this query is sorted locally.
+// CANNOT LAUNCH LIKE THIS
 export const listenToThreads = (userId, onThread) => {
-  const threadsRef = db.ref('threads').orderByChild(`members/${userId}`);
+  const threadsRef = db
+    .ref('threads')
+    .orderByChild(`members/${userId}`)
+    .equalTo(true);
   threadsRef.on('child_added', (snap) => {
+    console.log('new thread found:', snap.val());
     onThread('added', snap.key, snap.val());
   });
   threadsRef.on('child_removed', (snap) => {

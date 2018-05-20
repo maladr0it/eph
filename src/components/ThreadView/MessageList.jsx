@@ -13,7 +13,6 @@ class MessageListComponent extends React.Component {
     super(props);
     this.debouncedScroll = debounce((scrollPos) => {
       const { scrollHeight, clientHeight } = this.messageListEl;
-      console.log(scrollPos, scrollHeight, clientHeight);
       const atBottom = scrollHeight - scrollPos === clientHeight;
       this.setState({
         atBottom,
@@ -39,7 +38,6 @@ class MessageListComponent extends React.Component {
   }
   render() {
     const { messageIds } = this.props;
-    console.log(this.state);
     return (
       <div
         className="MessageList"

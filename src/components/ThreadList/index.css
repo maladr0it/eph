@@ -1,5 +1,33 @@
 .ThreadList {
   flex-grow: 1;
   overflow-y: auto;
-  background: orange;
+  background: #eeeeee;
+}
+
+.Thread {
+  font-size: 2rem;
+  padding: 1rem;
+  border-bottom: 1px solid #888888;
+}
+.Thread.Unread {
+  background: pink;
+}
+.ThreadInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.ThreadInfo .LastMessage {
+  flex-grow: 1;
+  padding-left: 2rem;
+}
+.UnreadBadge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: red;
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+  color: white;
 }
