@@ -1,16 +1,63 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Message from './Message';
+import debounce from 'lodash.debounce';
 
 import { getMessageIdsByThread } from '../../reducers/messageIds';
+import Message from './Message';
 import './index.css';
 
-const MessageListComponent = ({ messageIds }) => (
-  <div className="MessageList">
-    <ul>{messageIds.map(id => <Message key={id} id={id} />)}</ul>
-  </div>
-);
+// TODO: some redundant re-renders here
+class MessageListComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.debouncedScroll = debounce((scrollPos) => {
+      const { scrollHeight, clientHeight } = this.messageListEl;
+      console.log(scrollPos, scrollHeight, clientHeight);
+      const atBottom = scrollHeight - scrollPos === clientHeight;
+      this.setState({
+        atBottom,
+      });
+    }, 250);
+  }
+  state = {
+    atBottom: true,
+  };
+  componentDidMount() {
+    this.scrollToBottom();
+  }
+  componentDidUpdate() {
+    if (this.state.atBottom) {
+      this.scrollToBottom();
+    }
+  }
+  scrollToBottom() {
+    this.bottomElement.scrollIntoView();
+  }
+  handleScroll(scrollPos) {
+    this.debouncedScroll(scrollPos);
+  }
+  render() {
+    const { messageIds } = this.props;
+    console.log(this.state);
+    return (
+      <div
+        className="MessageList"
+        ref={(el) => {
+          this.messageListEl = el;
+        }}
+        onScroll={e => this.handleScroll(e.target.scrollTop)}
+      >
+        <ul>{messageIds.map(id => <Message key={id} id={id} />)}</ul>
+        <div
+          ref={(el) => {
+            this.bottomElement = el;
+          }}
+        />
+      </div>
+    );
+  }
+}
 const mapStateToProps = (state, ownProps) => {
   const { threadId } = ownProps;
   return {
