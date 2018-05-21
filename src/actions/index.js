@@ -37,13 +37,20 @@ const onThread = (changeType, threadId, threadData) => (dispatch, getState) => {
     dispatch(threadsReordered(newOrder));
   }
 };
-export const followLink = (userId, inboxToken) => async (_, getState) => {
+// TODO: this should perhaps be done by looking at the redux store
+// but it may not have finished downloading
+// need some kind of flag to state that our inbox is finished syncing
+export const followLink = (userId, inboxToken) => async () => {
   const partnerId = await api.getUserFromInboxToken(inboxToken);
   // check if user already has a thread with this person
-  // TODO: this is maybe not ideal,
-  // consider checking the store from within the component?
-
-  console.log(`creating a thread with ${userId} and ${partnerId}`);
+  const threads = await api.getThreads(userId);
+  const [threadWithPartner] = Object.keys(threads).filter((id) => {
+    const { members } = threads[id];
+    return Object.keys(members).includes(partnerId);
+  });
+  if (threadWithPartner) {
+    return threadWithPartner;
+  }
   const res = await api.createThread([userId, partnerId]);
   return res.key;
 };

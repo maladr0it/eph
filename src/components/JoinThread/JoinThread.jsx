@@ -1,18 +1,23 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 
 import { followLink } from '../../actions';
 
 class JoinThreadComponent extends React.Component {
   state = {};
   // kick off the process of creating a thread
-  componentDidMount() {
+  async componentDidMount() {
     // create a thread using url param
-    this.props.handleMount(this.props.userId, this.props.match.params.inboxToken);
+    const threadId = await this.props.handleMount(
+      this.props.userId,
+      this.props.match.params.inboxToken,
+    );
+    this.props.history.push(`/threads/${threadId}`);
   }
   render() {
     const { inboxToken } = this.props.match.params;
-    return <div>The inbox token is: {inboxToken}</div>;
+    return <h1>Creating a chat with @{inboxToken}...</h1>;
   }
 }
 const mapStateToProps = state => ({

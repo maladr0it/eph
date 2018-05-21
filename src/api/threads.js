@@ -66,3 +66,12 @@ export const listenToThreads = (userId, onThread) => {
     onThread('modified', snap.key, snap.val());
   });
 };
+
+export const getThreads = async (userId) => {
+  const resp = await db
+    .ref('threads')
+    .orderByChild(`members/${userId}`)
+    .equalTo(true)
+    .once('value');
+  return resp.val() || {};
+};
