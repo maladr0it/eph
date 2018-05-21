@@ -5,6 +5,27 @@
   flex-grow: 1;
 }
 
+.ThreadControls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #dddddd;
+
+  flex-shrink: 0;
+}
+.ThreadControls * {
+  margin: 5px;
+  width: 6rem;
+}
+.ThreadControls .BackArrow {
+  color: royalblue;
+  font-size: 1.5rem;
+}
+.ThreadControls .PartnerEmoji {
+  font-size: 3rem;
+  text-align: center;
+}
+
 .MessageList {
   flex-grow: 1;
   overflow-y: auto;
@@ -31,7 +52,7 @@
   padding: 5px;
   display: flex;
   align-items: center;
-  border: 1px solid #dddddd;
+  border-top: 1px solid #dddddd;
 
   flex-shrink: 0;
 }

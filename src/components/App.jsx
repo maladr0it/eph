@@ -13,7 +13,6 @@ import { Route } from 'react-router-dom';
 // import PropTypes from 'prop-types';
 
 import { login } from '../actions';
-import ControlPanel from './ControlPanel';
 import ThreadList from './ThreadList';
 import ThreadView from './ThreadView';
 import JoinThread from './JoinThread';
@@ -28,12 +27,14 @@ class AppComponent extends React.Component {
     return (
       <div className="App">
         {/* <ControlPanel /> */}
-        {loggedIn && (
+        {loggedIn ? (
           <React.Fragment>
             <Route path="/join/:inboxToken" component={JoinThread} />
             <Route path="/threads" exact component={ThreadList} />
             <Route path="/threads/:threadId" component={ThreadView} />
           </React.Fragment>
+        ) : (
+          <h1>Loading...</h1>
         )}
       </div>
     );

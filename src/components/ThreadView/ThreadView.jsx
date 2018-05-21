@@ -3,9 +3,10 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
+import { threadActive, threadInactive } from '../../actions';
 import MessageList from './MessageList';
 import MessageInput from './MessageInput';
-import { threadActive, threadInactive } from '../../actions';
+import ThreadControls from './ThreadControls';
 import './index.css';
 
 // attach lifecycle methods to listen for thread change
@@ -24,13 +25,14 @@ class ThreadViewComponent extends React.Component {
     const { threadExists } = this.props;
     return (
       <div className="ThreadView">
-        <Link to="/threads">BACK</Link>
+        <ThreadControls threadId={threadId} />
         {threadExists ? (
           <React.Fragment>
             <MessageList threadId={threadId} />
             <MessageInput threadId={threadId} />
           </React.Fragment>
         ) : (
+          // TODO: include 24 logo here?
           <h2>We cant find this conversation, perhaps it has been removed?</h2>
         )}
       </div>

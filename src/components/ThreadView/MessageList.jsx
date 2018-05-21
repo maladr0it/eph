@@ -12,6 +12,9 @@ class MessageListComponent extends React.Component {
   constructor(props) {
     super(props);
     this.debouncedScroll = debounce((scrollPos) => {
+      if (!this.messageListEl) {
+        return;
+      }
       const { scrollHeight, clientHeight } = this.messageListEl;
       const atBottom = scrollHeight - scrollPos === clientHeight;
       this.setState({
