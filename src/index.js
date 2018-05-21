@@ -7,7 +7,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 import rootReducer from './reducers';
-import App from './App';
+import App from './components/App';
 import './index.css';
 // import registerServiceWorker from './registerServiceWorker';
 

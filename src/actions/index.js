@@ -37,6 +37,17 @@ const onThread = (changeType, threadId, threadData) => (dispatch, getState) => {
     dispatch(threadsReordered(newOrder));
   }
 };
+export const followLink = (userId, inboxToken) => async (_, getState) => {
+  const partnerId = await api.getUserFromInboxToken(inboxToken);
+  // check if user already has a thread with this person
+  // TODO: this is maybe not ideal,
+  // consider checking the store from within the component?
+
+  console.log(`creating a thread with ${userId} and ${partnerId}`);
+  const res = await api.createThread([userId, partnerId]);
+  return res.key;
+};
+
 export const createThread = memberIds => async () => {
   api.createThread(memberIds);
 };

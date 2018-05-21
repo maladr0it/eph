@@ -14,6 +14,14 @@ const getUser = async (userId) => {
   const snap = await db.ref(`users/${userId}`).once('value');
   return snap.val();
 };
+export const getUserFromInboxToken = async (inboxToken) => {
+  const resp = await db
+    .ref('users')
+    .orderByChild('inboxToken')
+    .equalTo(inboxToken)
+    .once('child_added');
+  return resp.key;
+};
 export const login = async () => {
   console.log('logging in');
   const resp = await auth.signInAnonymously();

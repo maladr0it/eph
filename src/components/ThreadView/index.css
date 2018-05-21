@@ -27,13 +27,22 @@
   background: royalblue;
 }
 
-/* .Message.You {
-  background: royalblue;
-  color: white;
-} */
+.MessageInput {
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  border: 1px solid #dddddd;
 
-.Message .Content {
-  margin: 0.5rem;
-  /* width: fit-content; */
-  background: red;
+  flex-shrink: 0;
+}
+.MessageInput * {
+  margin: 5px;
+}
+.MessageInput input[type="text"] {
+  flex-grow: 1;
+  padding: 1rem;
+}
+.MessageInput input[type="submit"] {
+  padding: 0.5rem;
+  color: royalblue;
 }

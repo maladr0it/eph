@@ -20,6 +20,9 @@
 .ThreadInfo .LastMessage {
   flex-grow: 1;
   padding-left: 2rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .UnreadBadge {
   display: flex;
@@ -30,4 +33,6 @@
   width: 3rem;
   height: 3rem;
   color: white;
+
+  flex-shrink: 0;
 }

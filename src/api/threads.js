@@ -23,7 +23,6 @@ export const clearUnread = async (threadId, userId) => {
   }
   db.ref(`threads/${threadId}/unread/${userId}`).transaction(() => 0);
 };
-
 export const createThread = async (memberIds) => {
   // TODO: replace with an update? maybe requires 2 server hits
   const memberMeta = memberIds.reduce(
@@ -43,7 +42,7 @@ export const createThread = async (memberIds) => {
       emoji: {},
     },
   );
-  db.ref('threads').push({
+  return db.ref('threads').push({
     ...memberMeta,
     updated: await getServerTime(),
   });
@@ -55,6 +54,7 @@ export const listenToThreads = (userId, onThread) => {
     .ref('threads')
     .orderByChild(`members/${userId}`)
     .equalTo(true);
+
   threadsRef.on('child_added', (snap) => {
     console.log('new thread found:', snap.val());
     onThread('added', snap.key, snap.val());

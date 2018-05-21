@@ -1,0 +1,33 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  display: block;
+  color: black;
+  text-decoration: none;
+}
+
+button,
+input[type="submit"],
+input[type="reset"] {
+  font-size: 1rem;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+input[type="text"] {
+  font-size: 1rem;
+  border: none;
+  cursor: text;
+}

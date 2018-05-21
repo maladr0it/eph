@@ -23,9 +23,9 @@ class MessageInputComponent extends React.Component {
   };
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form className="MessageInput" onSubmit={this.handleSubmit}>
         <input autoFocus type="text" value={this.state.value} onChange={this.handleChange} />
-        <input type="submit" />
+        <input type="submit" value="Send" />
       </form>
     );
   }

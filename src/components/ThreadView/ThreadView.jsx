@@ -5,8 +5,6 @@ import { Link } from 'react-router-dom';
 
 import MessageList from './MessageList';
 import MessageInput from './MessageInput';
-import ThreadDetail from './ThreadDetail';
-
 import { threadActive, threadInactive } from '../../actions';
 import './index.css';
 
@@ -23,20 +21,25 @@ class ThreadViewComponent extends React.Component {
   }
   render() {
     const { threadId } = this.props.match.params;
+    const { threadExists } = this.props;
     return (
-      <React.Fragment>
-        <div className="ThreadView">
-          <Link to="/threads">BACK</Link>
-          <ThreadDetail threadId={threadId} />
-          <MessageList threadId={threadId} />
-          <MessageInput threadId={threadId} />
-        </div>
-      </React.Fragment>
+      <div className="ThreadView">
+        <Link to="/threads">BACK</Link>
+        {threadExists ? (
+          <React.Fragment>
+            <MessageList threadId={threadId} />
+            <MessageInput threadId={threadId} />
+          </React.Fragment>
+        ) : (
+          <h2>We cant find this conversation, perhaps it has been removed?</h2>
+        )}
+      </div>
     );
   }
 }
-const mapStateToProps = state => ({
+const mapStateToProps = (state, ownProps) => ({
   userId: state.user.userId,
+  threadExists: state.threadIds.includes(ownProps.match.params.threadId),
 });
 const mapDispatchToProps = {
   handleThreadActive: threadActive,
@@ -46,6 +49,8 @@ const ThreadView = connect(mapStateToProps, mapDispatchToProps)(ThreadViewCompon
 export default ThreadView;
 
 ThreadViewComponent.propTypes = {
+  userId: PropTypes.string.isRequired,
+  threadExists: PropTypes.bool.isRequired,
   handleThreadActive: PropTypes.func.isRequired,
   handleThreadInactive: PropTypes.func.isRequired,
 };

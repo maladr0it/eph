@@ -2,6 +2,7 @@ import { LOGGED_IN } from '../actionTypes';
 
 const initialState = {
   userId: null,
+  loggedIn: false,
 };
 
 const user = (state = initialState, action) => {
@@ -11,6 +12,7 @@ const user = (state = initialState, action) => {
       return {
         ...state,
         userId,
+        loggedIn: true,
       };
     }
     default:
