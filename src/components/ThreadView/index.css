@@ -29,12 +29,16 @@
 .Banner {
   text-align: center;
   color: white;
-  background: #ee5622;
+  background: royalblue;
+  /* background: #ee5622; */
 }
 
 .MessageList {
   flex-grow: 1;
   overflow-y: auto;
+}
+.Onboarding {
+  text-align: center;
 }
 .MessageContainer {
   display: flex;

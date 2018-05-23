@@ -51,5 +51,5 @@ ThreadComponent.propTypes = {
   partnerEmoji: PropTypes.string.isRequired,
 };
 ThreadComponent.defaultProps = {
-  lastMessage: 'NONE',
+  lastMessage: 'No messages yet!',
 };
