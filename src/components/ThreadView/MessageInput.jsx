@@ -13,6 +13,20 @@ class MessageInputComponent extends React.Component {
       value: e.target.value,
     });
   };
+  // for iOS to allow for visible keyboard
+  handleFocus = () => {
+    setTimeout(() => {
+      document.body.scrollTop = 0;
+      document.documentElement.style.height = `${window.innerHeight}px`;
+      this.props.onKeyboard(true);
+    }, 100);
+  };
+  handleBlur = () => {
+    setTimeout(() => {
+      document.documentElement.style.height = `${window.innerHeight}px`;
+      this.props.onKeyboard(false);
+    }, 100);
+  };
   handleSubmit = (e) => {
     e.preventDefault();
     console.log(this.state.value);
@@ -24,7 +38,13 @@ class MessageInputComponent extends React.Component {
   render() {
     return (
       <form className="MessageInput" onSubmit={this.handleSubmit}>
-        <input autoFocus type="text" value={this.state.value} onChange={this.handleChange} />
+        <input
+          type="text"
+          value={this.state.value}
+          onFocus={this.handleFocus}
+          onBlur={this.handleBlur}
+          onChange={this.handleChange}
+        />
         <input type="submit" value="Send" />
       </form>
     );
@@ -43,4 +63,5 @@ MessageInputComponent.propTypes = {
   threadId: PropTypes.string.isRequired,
   userId: PropTypes.string.isRequired,
   handleSend: PropTypes.func.isRequired,
+  onKeyboard: PropTypes.func.isRequired,
 };

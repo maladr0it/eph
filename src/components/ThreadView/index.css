@@ -9,7 +9,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid #dddddd;
+  border: 1px solid #dddddd;
 
   flex-shrink: 0;
 }
@@ -22,7 +22,7 @@
   font-size: 1.5rem;
 }
 .ThreadControls .PartnerEmoji {
-  font-size: 3rem;
+  font-size: 2rem;
   text-align: center;
 }
 
@@ -41,7 +41,7 @@
 
 .Message {
   background: #eeeeee;
-  padding: 1.5rem;
+  padding: 0.5rem;
 }
 .Message.You {
   color: white;

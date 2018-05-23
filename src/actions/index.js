@@ -11,7 +11,6 @@ import * as api from '../api';
 // TODO: this should be replaced by a orderByChild query
 const orderThreads = threads =>
   Object.keys(threads).sort((a, b) => threads[a].updated < threads[b].updated);
-
 const onMessage = (threadId, messageId, messageData) => (dispatch) => {
   console.log(`adding message ${messageId} to ${threadId}`);
   dispatch(messageAdded(threadId, messageId, messageData));

@@ -34,7 +34,8 @@ class MessageListComponent extends React.Component {
     }
   }
   scrollToBottom() {
-    this.bottomElement.scrollIntoView();
+    // this.bottomElement.scrollIntoView();
+    this.messageListEl.scrollTop = this.messageListEl.scrollHeight;
   }
   handleScroll(scrollPos) {
     this.debouncedScroll(scrollPos);
