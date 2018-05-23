@@ -19,13 +19,15 @@ class MessageInputComponent extends React.Component {
       document.body.scrollTop = 0;
       document.documentElement.style.height = `${window.innerHeight}px`;
       this.props.onKeyboard(true);
-    }, 100);
+    }, 200);
   };
   handleBlur = () => {
     setTimeout(() => {
-      document.documentElement.style.height = `${window.innerHeight}px`;
+      // TODO: resizing window on desktop is problematic here
+      // document.documentElement.style.height = `${window.innerHeight}px`;
+      document.documentElement.style.height = '100%';
       this.props.onKeyboard(false);
-    }, 100);
+    }, 200);
   };
   handleSubmit = (e) => {
     e.preventDefault();
@@ -41,8 +43,8 @@ class MessageInputComponent extends React.Component {
         <input
           type="text"
           value={this.state.value}
-          onFocus={this.handleFocus}
-          onBlur={this.handleBlur}
+          // onFocus={this.handleFocus}
+          // onBlur={this.handleBlur}
           onChange={this.handleChange}
         />
         <input type="submit" value="Send" />
