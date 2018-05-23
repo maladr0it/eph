@@ -9,8 +9,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router';
-import { Route } from 'react-router-dom';
+import { withRouter, Switch } from 'react-router';
+import { Route, Redirect } from 'react-router-dom';
 // import PropTypes from 'prop-types';
 
 import { login } from '../actions';
@@ -28,11 +28,12 @@ class AppComponent extends React.Component {
     return (
       <div className="App">
         {loggedIn ? (
-          <React.Fragment>
+          <Switch>
             <Route path="/join/:inboxToken" component={JoinThread} />
+            <Redirect from="/" to="/threads" exact />
             <Route path="/threads" exact component={ThreadList} />
             <Route path="/threads/:threadId" component={ThreadView} />
-          </React.Fragment>
+          </Switch>
         ) : (
           <h1>Loading...</h1>
         )}
