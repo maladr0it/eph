@@ -39,7 +39,7 @@ class ThreadViewComponent extends React.Component {
     return (
       <div className="ThreadView">
         <Banner />
-        <ThreadControls threadId={threadId} />
+        <ThreadControls threadId={threadId} threadExists={threadExists} />
         {threadExists ? (
           <React.Fragment>
             <MessageList threadId={threadId} keyboardUp={this.state.keyboardUp} />

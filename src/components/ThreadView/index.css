@@ -17,13 +17,19 @@
   margin: 5px;
   width: 6rem;
 }
-.ThreadControls .BackArrow {
+.BackArrow {
   color: royalblue;
   font-size: 1.5rem;
 }
-.ThreadControls .PartnerEmoji {
+.PartnerEmoji {
   font-size: 2rem;
   text-align: center;
+}
+.DeleteButton {
+  color: white;
+  padding: 5px;
+  background: #ee5622;
+  border-radius: 2px;
 }
 
 .Banner {

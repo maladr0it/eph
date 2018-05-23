@@ -57,6 +57,9 @@ export const followLink = (userId, inboxToken) => async () => {
 export const createThread = memberIds => async () => {
   api.createThread(memberIds);
 };
+export const deleteThread = threadId => async () => {
+  api.deleteThread(threadId);
+};
 // TODO: consider moving more specific thunks to their respective files
 export const threadActive = (threadId, userId) => async () => {
   api.setActive(threadId, userId, true);

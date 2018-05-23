@@ -4,7 +4,9 @@ const Banner = () => (
   <div className="Banner">
     <p>Want your own link to share? Notifications?</p>
     <a href="#">
-      <p>Get the APP</p>
+      <p>
+        <u>Get the APP</u>
+      </p>
     </a>
   </div>
 );
