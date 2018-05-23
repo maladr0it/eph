@@ -9,7 +9,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid #dddddd;
+  border: 1px solid #dddddd;
 
   flex-shrink: 0;
 }
@@ -17,20 +17,33 @@
   margin: 5px;
   width: 6rem;
 }
-.ThreadControls .BackArrow {
+.BackArrow {
   color: royalblue;
   font-size: 1.5rem;
 }
-.ThreadControls .PartnerEmoji {
-  font-size: 3rem;
+.PartnerEmoji {
+  font-size: 2rem;
   text-align: center;
+}
+.DeleteButton {
+  font-size: 1.5rem;
+  color: #ee5622;
+}
+
+.Banner {
+  text-align: center;
+  color: white;
+  background: royalblue;
+  /* background: #ee5622; */
 }
 
 .MessageList {
   flex-grow: 1;
   overflow-y: auto;
 }
-
+.Onboarding {
+  text-align: center;
+}
 .MessageContainer {
   display: flex;
   margin: 1rem;
@@ -38,10 +51,9 @@
 .MessageContainer.You {
   justify-content: flex-end;
 }
-
 .Message {
   background: #eeeeee;
-  padding: 1.5rem;
+  padding: 0.5rem;
 }
 .Message.You {
   color: white;
@@ -52,7 +64,7 @@
   padding: 5px;
   display: flex;
   align-items: center;
-  border-top: 1px solid #dddddd;
+  border: 1px solid #dddddd;
 
   flex-shrink: 0;
 }

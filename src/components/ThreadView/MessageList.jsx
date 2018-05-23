@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import debounce from 'lodash.debounce';
 
 import { getMessageIdsByThread } from '../../reducers/messageIds';
+import Onboarding from './Onboarding';
 import Message from './Message';
 import './index.css';
 
@@ -34,28 +35,35 @@ class MessageListComponent extends React.Component {
     }
   }
   scrollToBottom() {
-    this.bottomElement.scrollIntoView();
+    // this.bottomElement.scrollIntoView();
+    this.messageListEl.scrollTop = this.messageListEl.scrollHeight;
   }
   handleScroll(scrollPos) {
     this.debouncedScroll(scrollPos);
   }
   render() {
     const { messageIds } = this.props;
+    const messages = messageIds.length > 0 && (
+      <ul>{messageIds.map(id => <Message key={id} id={id} />)}</ul>
+    );
     return (
-      <div
-        className="MessageList"
-        ref={(el) => {
-          this.messageListEl = el;
-        }}
-        onScroll={e => this.handleScroll(e.target.scrollTop)}
-      >
-        <ul>{messageIds.map(id => <Message key={id} id={id} />)}</ul>
+      <React.Fragment>
+        {messageIds.length === 0 && <Onboarding />}
         <div
+          className="MessageList"
           ref={(el) => {
-            this.bottomElement = el;
+            this.messageListEl = el;
           }}
-        />
-      </div>
+          onScroll={e => this.handleScroll(e.target.scrollTop)}
+        >
+          {messages}
+          <div
+            ref={(el) => {
+              this.bottomElement = el;
+            }}
+          />
+        </div>
+      </React.Fragment>
     );
   }
 }

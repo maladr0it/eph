@@ -11,7 +11,6 @@ import * as api from '../api';
 // TODO: this should be replaced by a orderByChild query
 const orderThreads = threads =>
   Object.keys(threads).sort((a, b) => threads[a].updated < threads[b].updated);
-
 const onMessage = (threadId, messageId, messageData) => (dispatch) => {
   console.log(`adding message ${messageId} to ${threadId}`);
   dispatch(messageAdded(threadId, messageId, messageData));
@@ -57,6 +56,9 @@ export const followLink = (userId, inboxToken) => async () => {
 
 export const createThread = memberIds => async () => {
   api.createThread(memberIds);
+};
+export const deleteThread = threadId => async () => {
+  api.deleteThread(threadId);
 };
 // TODO: consider moving more specific thunks to their respective files
 export const threadActive = (threadId, userId) => async () => {

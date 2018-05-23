@@ -23,6 +23,8 @@ export const clearUnread = async (threadId, userId) => {
   }
   db.ref(`threads/${threadId}/unread/${userId}`).transaction(() => 0);
 };
+export const deleteThread = async threadId => db.ref(`threads/${threadId}`).remove();
+
 export const createThread = async (memberIds) => {
   // TODO: replace with an update? maybe requires 2 server hits
   const memberMeta = memberIds.reduce(

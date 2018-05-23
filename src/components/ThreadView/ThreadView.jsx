@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import { threadActive, threadInactive } from '../../actions';
+import Banner from './Banner';
 import MessageList from './MessageList';
 import MessageInput from './MessageInput';
 import ThreadControls from './ThreadControls';
@@ -14,22 +15,35 @@ import './index.css';
 
 class ThreadViewComponent extends React.Component {
   // TODO: consider putting listeners in componentDidUpdate
+  state = {
+    keyboardUp: false,
+  };
   componentDidMount() {
     this.props.handleThreadActive(this.props.match.params.threadId, this.props.userId);
   }
   componentWillUnmount() {
     this.props.handleThreadInactive(this.props.match.params.threadId, this.props.userId);
   }
+  // this is to notify the messageList that the app has resized
+  // and the scrollPos needs to be adjusted
+  setKeyboard(up) {
+    this.setState({
+      keyboardUp: up,
+    });
+  }
   render() {
     const { threadId } = this.props.match.params;
     const { threadExists } = this.props;
+    console.log(this.state.keyboardUp);
+
     return (
       <div className="ThreadView">
-        <ThreadControls threadId={threadId} />
+        <Banner />
+        <ThreadControls threadId={threadId} threadExists={threadExists} />
         {threadExists ? (
           <React.Fragment>
-            <MessageList threadId={threadId} />
-            <MessageInput threadId={threadId} />
+            <MessageList threadId={threadId} keyboardUp={this.state.keyboardUp} />
+            <MessageInput threadId={threadId} onKeyboard={up => this.setKeyboard(up)} />
           </React.Fragment>
         ) : (
           // TODO: include 24 logo here?

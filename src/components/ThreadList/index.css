@@ -1,11 +1,17 @@
+.Banner {
+  color: white;
+  background: royalblue;
+  /* background: #ee5622; */
+}
+
 .ThreadList {
   flex-grow: 1;
   overflow-y: auto;
 }
 .Thread {
-  font-size: 2rem;
-  padding: 1rem;
-  border-bottom: 1px solid #eeeeee;
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  border: 1px solid #eeeeee;
 }
 .Thread.Unread {
   background: pink;
@@ -28,8 +34,8 @@
   justify-content: center;
   background: red;
   border-radius: 50%;
-  width: 3rem;
-  height: 3rem;
+  width: 2rem;
+  height: 2rem;
   color: white;
 
   flex-shrink: 0;

@@ -1,8 +1,9 @@
 .App {
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  overflow: hidden;
+  justify-content: center;
+  height: 100%;
+  color: #454545;
 }
 
 ul {
