@@ -12,7 +12,7 @@ const Onboarding = () => (
     <p>We delete all messages every night at 12 AM EST.</p>
     <br />
     <p>
-      <a href="#">
+      <a href="https://xg9d6.app.goo.gl/24">
         <u>Download the app</u>
       </a>{' '}
       for notifications and more
