@@ -61,9 +61,8 @@
 }
 .MessageInput input[type="text"] {
   flex-grow: 1;
-  padding: 1rem;
+  padding: 0.5rem;
 }
 .MessageInput input[type="submit"] {
-  padding: 0.5rem;
   color: royalblue;
 }
