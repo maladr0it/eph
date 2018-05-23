@@ -8,15 +8,15 @@ const Onboarding = () => (
     <p>
       Message this user here; <b>they won't know</b> who it's from!
     </p>
-    <p>
-      Visit the link again later to check for replies, or{' '}
-      <a href="#">
-        <u>download the app</u>
-      </a>{' '}
-      for notifications and more.
-    </p>
+    <p>Visit this link later to check for replies.</p>
+    <p>We delete all messages every night at 12 AM EST.</p>
     <br />
-    <p>All messages are cleared at 12am PST.</p>
+    <p>
+      <a href="#">
+        <u>Download the app</u>
+      </a>{' '}
+      for notifications and more
+    </p>
   </div>
 );
 export default Onboarding;

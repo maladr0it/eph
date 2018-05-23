@@ -21,7 +21,7 @@ const ThreadControlsComponent = ({
     <div>
       {threadExists && (
         <button className="DeleteButton" onClick={() => handleDelete(threadId)}>
-          DELETE CHAT
+          delete
         </button>
       )}
     </div>
