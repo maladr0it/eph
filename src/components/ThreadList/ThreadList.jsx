@@ -2,14 +2,18 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+import Banner from './Banner';
 import Thread from './Thread';
 import './index.css';
 
 // TODO: change to pureComponent
 const ThreadListComponent = ({ ids }) => (
-  <div className="ThreadList">
-    <ul>{ids.map(id => <Thread key={id} threadId={id} />)}</ul>
-  </div>
+  <React.Fragment>
+    <Banner />
+    <div className="ThreadList">
+      <ul>{ids.map(id => <Thread key={id} threadId={id} />)}</ul>
+    </div>
+  </React.Fragment>
 );
 const mapStateToProps = state => ({
   ids: state.threadIds, // TODO: replace with a selector

@@ -26,11 +26,16 @@
   text-align: center;
 }
 
+.Banner {
+  text-align: center;
+  color: white;
+  background: #ee5622;
+}
+
 .MessageList {
   flex-grow: 1;
   overflow-y: auto;
 }
-
 .MessageContainer {
   display: flex;
   margin: 1rem;
@@ -38,7 +43,6 @@
 .MessageContainer.You {
   justify-content: flex-end;
 }
-
 .Message {
   background: #eeeeee;
   padding: 0.5rem;

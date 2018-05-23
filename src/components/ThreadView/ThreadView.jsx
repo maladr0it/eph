@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import { threadActive, threadInactive } from '../../actions';
+import Banner from './Banner';
 import MessageList from './MessageList';
 import MessageInput from './MessageInput';
 import ThreadControls from './ThreadControls';
@@ -37,6 +38,7 @@ class ThreadViewComponent extends React.Component {
 
     return (
       <div className="ThreadView">
+        <Banner />
         <ThreadControls threadId={threadId} />
         {threadExists ? (
           <React.Fragment>

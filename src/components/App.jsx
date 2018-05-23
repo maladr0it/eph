@@ -26,7 +26,6 @@ class AppComponent extends React.Component {
     const { loggedIn } = this.props;
     return (
       <div className="App">
-        {/* <ControlPanel /> */}
         {loggedIn ? (
           <React.Fragment>
             <Route path="/join/:inboxToken" component={JoinThread} />

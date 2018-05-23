@@ -10,7 +10,7 @@ import './index.css';
 const ThreadControlsComponent = ({ partnerEmoji }) => (
   <div className="ThreadControls">
     <div className="BackArrow">
-      <Link to="/threads">{'< back'}</Link>
+      <Link to="/threads">inbox</Link>
     </div>
     <div className="PartnerEmoji">
       <Emoji name={partnerEmoji} />
