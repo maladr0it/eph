@@ -5,7 +5,9 @@ import './index.css';
 const Onboarding = () => (
   <div className="Onboarding">
     <h1>24 chat</h1>
-    <p>Message this user here; they won't know who it's from!</p>
+    <p>
+      Message this user here; <b>they won't know</b> who it's from!
+    </p>
     <p>
       Visit the link again later to check for replies, or{' '}
       <a href="#">

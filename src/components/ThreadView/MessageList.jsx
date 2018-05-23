@@ -43,27 +43,27 @@ class MessageListComponent extends React.Component {
   }
   render() {
     const { messageIds } = this.props;
-    const messages =
-      messageIds.length > 0 ? (
-        <ul>{messageIds.map(id => <Message key={id} id={id} />)}</ul>
-      ) : (
-        <Onboarding />
-      );
+    const messages = messageIds.length > 0 && (
+      <ul>{messageIds.map(id => <Message key={id} id={id} />)}</ul>
+    );
     return (
-      <div
-        className="MessageList"
-        ref={(el) => {
-          this.messageListEl = el;
-        }}
-        onScroll={e => this.handleScroll(e.target.scrollTop)}
-      >
-        {messages}
+      <React.Fragment>
+        {messageIds.length === 0 && <Onboarding />}
         <div
+          className="MessageList"
           ref={(el) => {
-            this.bottomElement = el;
+            this.messageListEl = el;
           }}
-        />
-      </div>
+          onScroll={e => this.handleScroll(e.target.scrollTop)}
+        >
+          {messages}
+          <div
+            ref={(el) => {
+              this.bottomElement = el;
+            }}
+          />
+        </div>
+      </React.Fragment>
     );
   }
 }
