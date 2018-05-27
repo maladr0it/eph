@@ -24,6 +24,13 @@ export const clearUnread = async (threadId, userId) => {
   db.ref(`threads/${threadId}/unread/${userId}`).transaction(() => 0);
 };
 export const deleteThread = async threadId => db.ref(`threads/${threadId}`).remove();
+export const deleteManyThreads = async (threadIds) => {
+  const updates = threadIds.reduce((acc, id) => {
+    acc[`threads/${id}`] = null;
+    return acc;
+  }, {});
+  db.ref().update(updates);
+};
 
 export const createThread = async (memberIds) => {
   // TODO: replace with an update? maybe requires 2 server hits
@@ -67,7 +74,7 @@ export const listenToThreads = (userId, onThread) => {
     onThread('modified', snap.key, snap.val());
   });
 };
-
+// TODO: unused
 export const getThreads = async (userId) => {
   const resp = await db
     .ref('threads')

@@ -40,3 +40,8 @@
 
   flex-shrink: 0;
 }
+
+.DeleteAllButton {
+  font-size: 1.5rem;
+  color: red;
+}

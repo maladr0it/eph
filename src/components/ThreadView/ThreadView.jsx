@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 
 import { threadActive, threadInactive } from '../../actions';
 import Banner from './Banner';
@@ -67,4 +66,9 @@ ThreadViewComponent.propTypes = {
   threadExists: PropTypes.bool.isRequired,
   handleThreadActive: PropTypes.func.isRequired,
   handleThreadInactive: PropTypes.func.isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      threadId: PropTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired,
 };

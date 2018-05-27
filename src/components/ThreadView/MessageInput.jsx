@@ -41,6 +41,7 @@ class MessageInputComponent extends React.Component {
       <form className="MessageInput" onSubmit={this.handleSubmit}>
         <input
           type="text"
+          placeholder="Send a message..."
           value={this.state.value}
           // onFocus={this.handleFocus}
           // onBlur={this.handleBlur}

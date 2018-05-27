@@ -1,17 +1,8 @@
-// test IDs
-// PC:    ZNO5s71UJndyFxNu7alLPrVxfro1
-// PHONE: VhuzOP1UNdT7HN805d6db8eDs1e2
-// KAT:   xBqWv4oygUWkZQiJxrn82FUa3F02
-
-// KAT LINK: https://24.chat/@B18P5GHAG
-// MY LINK: https://24.chat/@SkBevFhTf
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter, Switch } from 'react-router';
 import { Route, Redirect } from 'react-router-dom';
-// import PropTypes from 'prop-types';
 
 import { login } from '../actions';
 import ThreadList from './ThreadList';

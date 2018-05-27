@@ -24,7 +24,11 @@ export const createThread = memberIds => async () => {
 export const deleteThread = threadId => async () => {
   api.deleteThread(threadId);
 };
-// TODO: consider moving more specific thunks to their respective files
+export const deleteAllThreads = threadIds => async () => {
+  if (window.confirm('Are you sure you want to delete ALL your conversations?')) {
+    api.deleteManyThreads(threadIds);
+  }
+};
 export const threadActive = (threadId, userId) => async () => {
   api.setActive(threadId, userId, true);
   api.clearUnread(threadId, userId);
