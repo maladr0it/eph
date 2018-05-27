@@ -1,13 +1,18 @@
 import shortid from 'shortid';
 
 import firebase from './firebase';
+import { generateLink } from './links';
 
 const auth = firebase.auth();
 const db = firebase.database();
 
 const createUser = async (userId) => {
+  const inboxToken = shortid.generate();
+  const inboxLink = await generateLink(inboxToken);
+
   db.ref(`users/${userId}`).set({
-    inboxToken: shortid.generate(),
+    inboxToken,
+    inboxLink,
   });
 };
 const getUser = async (userId) => {
@@ -25,12 +30,12 @@ export const getUserFromInboxToken = async (inboxToken) => {
 export const login = async () => {
   const resp = await auth.signInAnonymously();
   const userId = resp.user.uid;
-  let user = {};
+  let userData = {};
 
   if (resp.additionalUserInfo.isNewUser) {
-    user = await createUser(userId);
+    userData = await createUser(userId);
   } else {
-    user = await getUser(userId);
+    userData = await getUser(userId);
   }
-  return userId;
+  return { userId, userData };
 };

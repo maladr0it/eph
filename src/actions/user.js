@@ -1,8 +1,6 @@
-import {
-  LOGGED_IN,
-} from '../actionTypes';
+import { LOGGED_IN } from '../actionTypes';
 
-export const loggedIn = userId => ({
+export const loggedIn = (userId, userData) => ({
   type: LOGGED_IN,
-  payload: { userId },
+  payload: { userId, userData },
 });

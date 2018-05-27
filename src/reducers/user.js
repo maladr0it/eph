@@ -8,10 +8,11 @@ const initialState = {
 const user = (state = initialState, action) => {
   switch (action.type) {
     case LOGGED_IN: {
-      const { userId } = action.payload;
+      const { userId, userData } = action.payload;
       return {
         ...state,
         userId,
+        ...userData,
         loggedIn: true,
       };
     }
