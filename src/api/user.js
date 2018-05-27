@@ -23,7 +23,6 @@ export const getUserFromInboxToken = async (inboxToken) => {
   return resp.key;
 };
 export const login = async () => {
-  console.log('logging in');
   const resp = await auth.signInAnonymously();
   const userId = resp.user.uid;
   let user = {};
@@ -33,6 +32,5 @@ export const login = async () => {
   } else {
     user = await getUser(userId);
   }
-  console.log('logged in as', userId);
   return userId;
 };

@@ -31,7 +31,6 @@ class MessageInputComponent extends React.Component {
   };
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log(this.state.value);
     this.props.handleSend(this.props.threadId, this.props.userId, this.state.value);
     this.setState({
       value: '',

@@ -58,7 +58,6 @@ export const listenToThreads = (userId, onThread) => {
     .equalTo(true);
 
   threadsRef.on('child_added', (snap) => {
-    console.log('new thread found:', snap.val());
     onThread('added', snap.key, snap.val());
   });
   threadsRef.on('child_removed', (snap) => {

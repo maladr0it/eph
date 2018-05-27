@@ -34,8 +34,6 @@ class ThreadViewComponent extends React.Component {
   render() {
     const { threadId } = this.props.match.params;
     const { threadExists } = this.props;
-    console.log(this.state.keyboardUp);
-
     return (
       <div className="ThreadView">
         <Banner />

@@ -10,7 +10,6 @@ const getServerTime = async () => {
 };
 
 export const listenForMessages = (threadId, onMessage) => {
-  console.log(`listening for ${threadId}'s messages...`);
   db
     .ref(`messages/${threadId}`)
     .orderByChild('created')
