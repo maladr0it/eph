@@ -1,4 +1,4 @@
-import { LOGGED_IN } from '../actionTypes';
+import { LOGGED_IN, USER_INFO_UPDATED } from '../actionTypes';
 
 const initialState = {
   userId: null,
@@ -14,6 +14,13 @@ const user = (state = initialState, action) => {
         userId,
         ...userData,
         loggedIn: true,
+      };
+    }
+    case USER_INFO_UPDATED: {
+      const { userInfo } = action.payload;
+      return {
+        ...state,
+        ...userInfo,
       };
     }
     default:

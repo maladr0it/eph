@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 
@@ -27,5 +28,17 @@ const mapDispatchToProps = {
   handleMount: followLink,
 };
 const JoinThread = connect(mapStateToProps, mapDispatchToProps)(JoinThreadComponent);
-
 export default JoinThread;
+
+JoinThreadComponent.propTypes = {
+  userId: PropTypes.string.isRequired,
+  handleMount: PropTypes.func.isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      inboxToken: PropTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+};

@@ -31,7 +31,6 @@ export const deleteManyThreads = async (threadIds) => {
   }, {});
   db.ref().update(updates);
 };
-
 export const createThread = async (memberIds) => {
   // TODO: replace with an update? maybe requires 2 server hits
   const memberMeta = memberIds.reduce(

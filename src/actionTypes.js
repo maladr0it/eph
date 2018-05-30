@@ -1,4 +1,5 @@
 export const LOGGED_IN = 'LOGGED_IN';
+export const USER_INFO_UPDATED = 'USER_INFO_UPDATED';
 export const THREAD_ADDED = 'THREAD_ADDED';
 export const THREAD_REMOVED = 'THREAD_REMOVED';
 export const THREAD_MODIFIED = 'THREAD_MODIFIED';

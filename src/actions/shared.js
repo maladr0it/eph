@@ -52,7 +52,6 @@ export const followLink = (userId, inboxToken) => async () => {
   const res = await api.createThread([userId, partnerId]);
   return res.key;
 };
-
 export const login = () => async (dispatch) => {
   const { userId, userData } = await api.login();
   // once logged in, listen for user's threads

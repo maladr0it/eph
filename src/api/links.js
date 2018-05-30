@@ -31,5 +31,5 @@ export const generateLink = async (inboxToken) => {
     },
   );
   const data = await resp.json();
-  console.log(data);
+  return data.shortLink;
 };

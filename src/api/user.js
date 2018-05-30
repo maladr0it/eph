@@ -14,11 +14,25 @@ const createUser = async (userId) => {
     inboxToken,
     inboxLink,
   });
+  return { inboxToken, inboxLink };
 };
 const getUser = async (userId) => {
   const snap = await db.ref(`users/${userId}`).once('value');
   return snap.val();
 };
+
+export const regenerateInboxLink = async (userId) => {
+  const inboxToken = shortid.generate();
+  const inboxLink = await generateLink(inboxToken);
+
+  console.log(inboxToken, inboxLink, '>>>>');
+  await db.ref(`users/${userId}`).update({
+    inboxToken,
+    inboxLink,
+  });
+  return { inboxToken, inboxLink };
+};
+
 export const getUserFromInboxToken = async (inboxToken) => {
   const resp = await db
     .ref('users')
