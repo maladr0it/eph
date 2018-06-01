@@ -35,7 +35,6 @@ class ThreadViewComponent extends React.Component {
     const { threadExists } = this.props;
     return (
       <div className="ThreadView">
-        <Banner />
         <ThreadControls threadId={threadId} threadExists={threadExists} />
         {threadExists ? (
           <React.Fragment>

@@ -24,7 +24,6 @@ const getUser = async (userId) => {
 export const regenerateInboxLink = async (userId) => {
   const inboxToken = shortid.generate();
   const inboxLink = await generateLink(inboxToken);
-
   console.log(inboxToken, inboxLink, '>>>>');
   await db.ref(`users/${userId}`).update({
     inboxToken,

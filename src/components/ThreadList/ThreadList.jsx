@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import Banner from './Banner';
-import LinkInfo from './LinkInfo';
 import Thread from './Thread';
 import DeleteButton from './DeleteButton';
 import './index.css';
@@ -12,7 +11,6 @@ import './index.css';
 const ThreadListComponent = ({ ids }) => (
   <React.Fragment>
     <Banner />
-    <LinkInfo />
     <div className="ThreadList">
       <ul>{ids.map(id => <Thread key={id} threadId={id} />)}</ul>
     </div>

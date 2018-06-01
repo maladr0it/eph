@@ -5,6 +5,7 @@ import { withRouter, Switch } from 'react-router';
 import { Route, Redirect } from 'react-router-dom';
 
 import { login } from '../actions';
+import LinkInfo from './LinkInfo';
 import ThreadList from './ThreadList';
 import ThreadView from './ThreadView';
 import JoinThread from './JoinThread';
@@ -19,12 +20,15 @@ class AppComponent extends React.Component {
     return (
       <div className="App">
         {loggedIn ? (
-          <Switch>
-            <Route path="/join/:inboxToken" component={JoinThread} />
-            <Redirect from="/" to="/threads" exact />
-            <Route path="/threads" exact component={ThreadList} />
-            <Route path="/threads/:threadId" component={ThreadView} />
-          </Switch>
+          <React.Fragment>
+            <LinkInfo />
+            <Switch>
+              <Route path="/join/:inboxToken" component={JoinThread} />
+              <Redirect from="/" to="/threads" exact />
+              <Route path="/threads" exact component={ThreadList} />
+              <Route path="/threads/:threadId" component={ThreadView} />
+            </Switch>
+          </React.Fragment>
         ) : (
           <h1>Loading...</h1>
         )}

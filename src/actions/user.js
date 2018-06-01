@@ -11,6 +11,8 @@ export const loggedIn = (userId, userData) => ({
 });
 
 export const newLink = userId => async (dispatch) => {
-  const { inboxToken, inboxLink } = await api.regenerateInboxLink(userId);
-  dispatch(userInfoUpdated({ inboxToken, inboxLink }));
+  if (window.confirm('Are you sure you want a new 24 link? Your old link will no longer work.')) {
+    const { inboxToken, inboxLink } = await api.regenerateInboxLink(userId);
+    dispatch(userInfoUpdated({ inboxToken, inboxLink }));
+  }
 };
