@@ -6,10 +6,13 @@ import { withRouter } from 'react-router';
 import { followLink } from '../../actions';
 
 class JoinThreadComponent extends React.Component {
-  state = {};
   // kick off the process of creating a thread
   async componentDidMount() {
-    // create a thread using url param
+    // if you clicked your own link, go to your inbox
+    if (this.props.inboxToken === this.props.match.params.inboxToken) {
+      this.props.history.push('/threads');
+      return;
+    }
     const threadId = await this.props.handleMount(
       this.props.userId,
       this.props.match.params.inboxToken,
@@ -23,6 +26,7 @@ class JoinThreadComponent extends React.Component {
 }
 const mapStateToProps = state => ({
   userId: state.user.userId,
+  inboxToken: state.user.inboxToken,
 });
 const mapDispatchToProps = {
   handleMount: followLink,
@@ -32,6 +36,7 @@ export default JoinThread;
 
 JoinThreadComponent.propTypes = {
   userId: PropTypes.string.isRequired,
+  inboxToken: PropTypes.string.isRequired,
   handleMount: PropTypes.func.isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({

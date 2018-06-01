@@ -37,11 +37,19 @@ input[type="text"] {
   text-align: center;
   color: white;
   background: royalblue;
-  /* background: #ee5622; */
 }
-
 .Banner a {
   text-decoration: underline;
+}
+.Banner .AppPromo {
+  display: flex;
+  padding: 5px 0 5px 0;
+  align-items: center;
+  justify-content: center;
+}
+.Banner .Logo {
+  height: 1.2rem;
+  padding-right: 1rem;
 }
 
 .LinkInfo {
