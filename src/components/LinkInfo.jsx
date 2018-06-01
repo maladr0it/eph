@@ -1,13 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 import { newLink } from '../actions';
 
 const LinkInfoComponent = ({ userId, inboxToken, handleNewLink }) => (
   <div className="LinkInfo">
     <span className="LinkText">{`https://24.chat/@${inboxToken}`}</span>
-    <button className="CopyButton">Copy Your Link</button>
+    <CopyToClipboard text={`https://24.chat/@${inboxToken}`}>
+      <button className="CopyButton">Copy Your Link</button>
+    </CopyToClipboard>
     {/* <button onClick={() => handleNewLink(userId)}>NEW_INBOX_LINK</button> */}
   </div>
 );
