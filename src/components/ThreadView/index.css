@@ -9,23 +9,23 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  height: 3rem;
   border: 1px solid #dddddd;
 
   flex-shrink: 0;
 }
 .ThreadControls * {
   margin: 5px;
-  /* width: 6rem; */
 }
-.BackArrow {
+.ThreadControls .BackArrow {
   font-size: 1.2rem;
   color: royalblue;
 }
-.PartnerEmoji {
+.ThreadControls .PartnerEmoji {
   font-size: 2rem;
   text-align: center;
 }
-.DeleteButton {
+.ThreadControls .DeleteButton {
   font-size: 1.2rem;
   color: #ee5622;
 }

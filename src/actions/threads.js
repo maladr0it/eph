@@ -18,8 +18,8 @@ export const threadsReordered = newOrder => ({
   payload: { newOrder },
 });
 
-export const createThread = memberIds => async () => {
-  api.createThread(memberIds);
+export const createThread = (creator, memberIds) => async () => {
+  api.createThread(creator, memberIds);
 };
 export const deleteThread = threadId => async () => {
   if (window.confirm('Are you sure you want to delete this conversation?')) {

@@ -31,7 +31,7 @@ export const deleteManyThreads = async (threadIds) => {
   }, {});
   db.ref().update(updates);
 };
-export const createThread = async (memberIds) => {
+export const createThread = async (creator, memberIds) => {
   // TODO: replace with an update? maybe requires 2 server hits
   const memberMeta = memberIds.reduce(
     (acc, id) => {
@@ -53,6 +53,7 @@ export const createThread = async (memberIds) => {
   return db.ref('threads').push({
     ...memberMeta,
     updated: await getServerTime(),
+    creator,
   });
 };
 // TODO: DANGER! this query is sorted locally.

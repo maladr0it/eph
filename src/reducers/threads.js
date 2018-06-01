@@ -47,6 +47,8 @@ export const getThread = (state, threadId) => state[threadId];
 export const getUnread = (state, threadId, userId) =>
   state[threadId] && state[threadId].unread && state[threadId].unread[userId];
 
+export const getCreator = (state, threadId) => state[threadId] && state[threadId].creator;
+
 // TODO: this actually gets your emoji, in accordance to the phone app's behaviour
 export const getPartnerEmoji = (state, threadId, userId) =>
   state[threadId] && state[threadId].emoji && state[threadId].emoji[userId];

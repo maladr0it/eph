@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import debounce from 'lodash.debounce';
 
 import { getMessageIdsByThread } from '../../reducers/messageIds';
+import { getCreator } from '../../reducers/threads';
 import Onboarding from './Onboarding';
 import Message from './Message';
 import './index.css';
@@ -42,10 +43,7 @@ class MessageListComponent extends React.Component {
     this.debouncedScroll(scrollPos);
   }
   render() {
-    const { messageIds } = this.props;
-    const messages = messageIds.length > 0 && (
-      <ul>{messageIds.map(id => <Message key={id} id={id} />)}</ul>
-    );
+    const { userId, creator, messageIds } = this.props;
     return (
       <React.Fragment>
         <div
@@ -55,8 +53,10 @@ class MessageListComponent extends React.Component {
           }}
           onScroll={e => this.handleScroll(e.target.scrollTop)}
         >
-          <Onboarding />
-          {messages}
+          <ul>
+            {creator === userId && <Onboarding />}
+            {messageIds.map(id => <Message key={id} id={id} />)}
+          </ul>
           <div
             ref={(el) => {
               this.bottomElement = el;
@@ -70,6 +70,8 @@ class MessageListComponent extends React.Component {
 const mapStateToProps = (state, ownProps) => {
   const { threadId } = ownProps;
   return {
+    userId: state.user.userId,
+    creator: getCreator(state.threads, threadId),
     threadId,
     messageIds: getMessageIdsByThread(state.messageIds, threadId),
   };

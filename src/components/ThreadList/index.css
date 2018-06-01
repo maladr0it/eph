@@ -39,6 +39,7 @@
 }
 
 .DeleteAllButton {
+  border: 1px solid #dddddd;
   font-size: 1.5rem;
   color: red;
 }

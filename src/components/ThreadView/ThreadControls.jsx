@@ -15,11 +15,11 @@ const ThreadControlsComponent = ({
     <div className="BackArrow">
       <Link to="/threads">inbox</Link>
     </div>
-    <div className="PartnerEmoji">
-      <Emoji name={partnerEmoji} />
-    </div>
     {threadExists && (
       <React.Fragment>
+        <div className="PartnerEmoji">
+          <Emoji name={partnerEmoji} />
+        </div>
         <div>
           <button className="DeleteButton" onClick={() => handleDelete(threadId)}>
             delete

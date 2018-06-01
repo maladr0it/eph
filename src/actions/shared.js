@@ -49,7 +49,7 @@ export const followLink = (userId, inboxToken) => async () => {
   if (threadWithPartner) {
     return threadWithPartner;
   }
-  const res = await api.createThread([userId, partnerId]);
+  const res = await api.createThread(userId, [userId, partnerId]);
   return res.key;
 };
 export const login = () => async (dispatch) => {
