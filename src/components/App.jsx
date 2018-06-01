@@ -5,7 +5,7 @@ import { withRouter, Switch } from 'react-router';
 import { Route, Redirect } from 'react-router-dom';
 
 import { login } from '../actions';
-import LinkInfo from './LinkInfo';
+import Banner from './Banner';
 import ThreadList from './ThreadList';
 import ThreadView from './ThreadView';
 import JoinThread from './JoinThread';
@@ -21,7 +21,7 @@ class AppComponent extends React.Component {
       <div className="App">
         {loggedIn ? (
           <React.Fragment>
-            <LinkInfo />
+            <Banner />
             <Switch>
               <Route path="/join/:inboxToken" component={JoinThread} />
               <Redirect from="/" to="/threads" exact />

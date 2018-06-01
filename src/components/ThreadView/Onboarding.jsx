@@ -2,21 +2,21 @@ import React from 'react';
 
 import './index.css';
 
+const messages = [
+  'hey, you just started a private conversation between us!',
+  "you clicked my link, so i guess you know who i am... but i don't know who you are!",
+  'go ahead and send me a secret message! visit my link again later to see my reply',
+  'FYI, your own link is at the top ^^, share this on your social media if you want other people to message you too :3',
+  'finally, all messages are deleted at midnight EST for your privacy',
+];
+
 const Onboarding = () => (
-  <div className="Onboarding">
-    <h1>24 chat</h1>
-    <p>
-      Message this user here; <b>they won't know</b> who it's from!
-    </p>
-    <p>Visit this link later to check for replies.</p>
-    <p>We delete all messages every night at 12 AM EST.</p>
-    <br />
-    <p>
-      <a href="https://xg9d6.app.goo.gl/24">
-        <u>Download the app</u>
-      </a>{' '}
-      for notifications and more
-    </p>
-  </div>
+  <React.Fragment>
+    {messages.map(text => (
+      <li className="MessageContainer">
+        <div className="Message">{text}</div>
+      </li>
+    ))}
+  </React.Fragment>
 );
 export default Onboarding;

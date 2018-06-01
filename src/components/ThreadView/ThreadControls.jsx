@@ -18,13 +18,15 @@ const ThreadControlsComponent = ({
     <div className="PartnerEmoji">
       <Emoji name={partnerEmoji} />
     </div>
-    <div>
-      {threadExists && (
-        <button className="DeleteButton" onClick={() => handleDelete(threadId)}>
-          delete
-        </button>
-      )}
-    </div>
+    {threadExists && (
+      <React.Fragment>
+        <div>
+          <button className="DeleteButton" onClick={() => handleDelete(threadId)}>
+            delete
+          </button>
+        </div>
+      </React.Fragment>
+    )}
   </div>
 );
 // overkill? should emoji be passes as a prop?

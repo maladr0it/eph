@@ -1,15 +1,8 @@
-.Banner {
-  color: white;
-  background: royalblue;
-  /* background: #ee5622; */
-}
-
 .ThreadList {
   flex-grow: 1;
   overflow-y: auto;
 }
 .Thread {
-  font-size: 1.5rem;
   padding: 0.5rem;
   border: 1px solid #eeeeee;
 }
@@ -23,10 +16,14 @@
 }
 .ThreadInfo .LastMessage {
   flex-grow: 1;
-  padding-left: 2rem;
+  padding-left: 1rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-size: 1.2rem;
+}
+.ThreadInfo .Emoji {
+  font-size: 2rem;
 }
 .UnreadBadge {
   display: flex;

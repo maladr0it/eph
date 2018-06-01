@@ -22,7 +22,9 @@ export const createThread = memberIds => async () => {
   api.createThread(memberIds);
 };
 export const deleteThread = threadId => async () => {
-  api.deleteThread(threadId);
+  if (window.confirm('Are you sure you want to delete this conversation?')) {
+    api.deleteThread(threadId);
+  }
 };
 export const deleteAllThreads = threadIds => async () => {
   if (window.confirm('Are you sure you want to delete ALL your conversations?')) {

@@ -17,15 +17,13 @@ const ThreadComponent = ({
     <li className={`Thread ${unreadClass}`}>
       <Link to={`${match.url}/${threadId}`}>
         <div className="ThreadInfo">
-          <div>
+          <div className="Emoji">
             <Emoji name={partnerEmoji} />
           </div>
           <div className="LastMessage">{lastMessage}</div>
           {unread > 0 && <UnreadBadge count={unread} />}
         </div>
       </Link>
-      {/* <p>UNREAD: {unread}</p> */}
-      {/* <p>lastMessage: {lastMessage}</p> */}
     </li>
   );
 };

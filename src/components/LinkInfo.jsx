@@ -5,10 +5,10 @@ import { connect } from 'react-redux';
 import { newLink } from '../actions';
 
 const LinkInfoComponent = ({ userId, inboxToken, handleNewLink }) => (
-  <div>
-    <p>Share this link on your social media to receive anonymous messages!</p>
-    <p>{`https://24.chat/@${inboxToken}`}</p>
-    <button onClick={() => handleNewLink(userId)}>NEW_INBOX_LINK</button>
+  <div className="LinkInfo">
+    <span className="LinkText">{`https://24.chat/@${inboxToken}`}</span>
+    <button className="CopyButton">Copy Your Link</button>
+    {/* <button onClick={() => handleNewLink(userId)}>NEW_INBOX_LINK</button> */}
   </div>
 );
 

@@ -48,7 +48,6 @@ class MessageListComponent extends React.Component {
     );
     return (
       <React.Fragment>
-        {messageIds.length === 0 && <Onboarding />}
         <div
           className="MessageList"
           ref={(el) => {
@@ -56,6 +55,7 @@ class MessageListComponent extends React.Component {
           }}
           onScroll={e => this.handleScroll(e.target.scrollTop)}
         >
+          <Onboarding />
           {messages}
           <div
             ref={(el) => {

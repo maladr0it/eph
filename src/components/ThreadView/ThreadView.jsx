@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { threadActive, threadInactive } from '../../actions';
-import Banner from './Banner';
 import MessageList from './MessageList';
 import MessageInput from './MessageInput';
 import ThreadControls from './ThreadControls';

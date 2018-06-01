@@ -15,35 +15,26 @@
 }
 .ThreadControls * {
   margin: 5px;
-  width: 6rem;
+  /* width: 6rem; */
 }
 .BackArrow {
+  font-size: 1.2rem;
   color: royalblue;
-  font-size: 1.5rem;
 }
 .PartnerEmoji {
   font-size: 2rem;
   text-align: center;
 }
 .DeleteButton {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   color: #ee5622;
-}
-
-.Banner {
-  text-align: center;
-  color: white;
-  background: royalblue;
-  /* background: #ee5622; */
 }
 
 .MessageList {
   flex-grow: 1;
   overflow-y: auto;
 }
-.Onboarding {
-  text-align: center;
-}
+
 .MessageContainer {
   display: flex;
   margin: 1rem;
@@ -54,10 +45,13 @@
 .Message {
   background: #eeeeee;
   padding: 0.5rem;
+  margin-right: 20vw;
 }
 .Message.You {
   color: white;
   background: royalblue;
+  margin-right: 0;
+  margin-left: 20vw;
 }
 
 .MessageInput {
