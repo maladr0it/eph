@@ -1,24 +1,22 @@
 import shortid from 'shortid';
 
-import firebase from './firebase';
+import { db, auth } from './firebase';
 import { generateLink } from './links';
-
-const auth = firebase.auth();
-const db = firebase.database();
 
 const createUser = async (userId) => {
   const inboxToken = shortid.generate();
-  const inboxLink = await generateLink(inboxToken);
-
-  db.ref(`users/${userId}`).set({
+  // const inboxLink = await generateLink(inboxToken);
+  const inboxLink = 'http://www.example.com';
+  db.doc(`users/${userId}`).set({
     inboxToken,
     inboxLink,
   });
   return { inboxToken, inboxLink };
 };
+
 const getUser = async (userId) => {
-  const snap = await db.ref(`users/${userId}`).once('value');
-  return snap.val();
+  const doc = await db.doc(`users/${userId}`).get();
+  return doc.data();
 };
 
 export const regenerateInboxLink = async (userId) => {
@@ -40,15 +38,20 @@ export const getUserFromInboxToken = async (inboxToken) => {
     .once('child_added');
   return resp.key;
 };
+
 export const login = async () => {
   const resp = await auth.signInAnonymously();
   const userId = resp.user.uid;
-  let userData = {};
+  let userData = null;
 
   if (resp.additionalUserInfo.isNewUser) {
+    console.log('USER DOES NOT EXIST');
     userData = await createUser(userId);
   } else {
+    console.log('USER EXISTS');
+    // userData = await createUser(userId);
     userData = await getUser(userId);
+    console.log(userData);
   }
   return { userId, userData };
 };

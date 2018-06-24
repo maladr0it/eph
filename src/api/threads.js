@@ -1,7 +1,7 @@
-import firebase from './firebase';
+import { db } from './firebase';
 import { getEmoji } from '../utils/emoji';
 
-const db = firebase.database();
+// const db = firebase.firestore();
 
 // TODO: put this in some shared file (api/index.js ?)
 const getServerTime = async () => {
@@ -56,23 +56,26 @@ export const createThread = async (creator, memberIds) => {
     creator,
   });
 };
-// TODO: DANGER! this query is sorted locally.
-// CANNOT LAUNCH LIKE THIS
+// HERE
 export const listenToThreads = (userId, onThread) => {
-  const threadsRef = db
-    .ref('threads')
-    .orderByChild(`members/${userId}`)
-    .equalTo(true);
+  db.collection(`users/${userId}/threads`).onSnapshot(snap =>
+    snap.docChanges().forEach((change) => {
+      onThread(change.type, change.doc.data());
+    }));
+  // const threadsRef = db
+  //   .ref('threads')
+  //   .orderByChild(`members/${userId}`)
+  //   .equalTo(true);
 
-  threadsRef.on('child_added', (snap) => {
-    onThread('added', snap.key, snap.val());
-  });
-  threadsRef.on('child_removed', (snap) => {
-    onThread('removed', snap.key, snap.val());
-  });
-  threadsRef.on('child_changed', (snap) => {
-    onThread('modified', snap.key, snap.val());
-  });
+  // threadsRef.on('child_added', (snap) => {
+  //   onThread('added', snap.key, snap.val());
+  // });
+  // threadsRef.on('child_removed', (snap) => {
+  //   onThread('removed', snap.key, snap.val());
+  // });
+  // threadsRef.on('child_changed', (snap) => {
+  //   onThread('modified', snap.key, snap.val());
+  // });
 };
 // TODO: unused
 export const getThreads = async (userId) => {

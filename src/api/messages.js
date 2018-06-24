@@ -1,6 +1,4 @@
-import firebase from './firebase';
-
-const db = firebase.database();
+import { db } from './firebase';
 
 // TODO: ideally replaced with firebase.database.ServerValue.TIMESTAMP
 const getServerTime = async () => {
@@ -10,8 +8,7 @@ const getServerTime = async () => {
 };
 
 export const listenForMessages = (threadId, onMessage) => {
-  db
-    .ref(`messages/${threadId}`)
+  db.ref(`messages/${threadId}`)
     .orderByChild('created')
     .on('child_added', (snap) => {
       const id = snap.key;

@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { withRouter, Switch } from 'react-router';
-import { Route, Redirect } from 'react-router-dom';
+// import { withRouter, Switch } from 'react-router';
+import { Route, Redirect, withRouter, Switch } from 'react-router-dom';
 
 import { login } from '../actions';
 import Banner from './Banner';
@@ -23,10 +23,10 @@ class AppComponent extends React.Component {
           <React.Fragment>
             <Banner />
             <Switch>
-              <Route path="/join/:inboxToken" component={JoinThread} />
-              <Redirect from="/" to="/threads" exact />
-              <Route path="/threads" exact component={ThreadList} />
-              <Route path="/threads/:threadId" component={ThreadView} />
+              {/* <Route path="/join/:inboxToken" component={JoinThread} /> */}
+              {/* <Redirect from="/" to="/threads" exact /> */}
+              {/* <Route path="/threads" exact component={ThreadList} /> */}
+              {/* <Route path="/threads/:threadId" component={ThreadView} /> */}
             </Switch>
           </React.Fragment>
         ) : (
@@ -42,7 +42,10 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   handleLogin: login,
 };
-const App = withRouter(connect(mapStateToProps, mapDispatchToProps)(AppComponent));
+const App = withRouter(connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(AppComponent));
 export default App;
 
 AppComponent.propTypes = {

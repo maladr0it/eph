@@ -55,6 +55,6 @@ export const followLink = (userId, inboxToken) => async () => {
 export const login = () => async (dispatch) => {
   const { userId, userData } = await api.login();
   // once logged in, listen for user's threads
-  api.listenToThreads(userId, (changeType, id, data) => dispatch(onThread(changeType, id, data)));
+  // api.listenToThreads(userId, (changeType, id, data) => dispatch(onThread(changeType, id, data)));
   dispatch(loggedIn(userId, userData));
 };

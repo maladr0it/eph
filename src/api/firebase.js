@@ -1,12 +1,20 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
-import 'firebase/database';
+import 'firebase/firestore';
+
+// apiKey: "AIzaSyBa10Ngl--VGFzCz8ZpQpALSFLfT1-TKnA",
+// authDomain: "ephemeral-22ae7.firebaseapp.com",
+// databaseURL: "https://ephemeral-22ae7.firebaseio.com",
+// projectId: "ephemeral-22ae7",
+// storageBucket: "ephemeral-22ae7.appspot.com",
+// messagingSenderId: "262050906976"
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyDcU15IueRv1HgZbWJt9jYBUdWRD81-zeQ',
-  databaseURL: 'https://everydaywith24.firebaseio.com/',
-  projectId: 'everydaywith24',
+  apiKey: 'AIzaSyBa10Ngl--VGFzCz8ZpQpALSFLfT1-TKnA',
+  authDomain: 'ephemeral-22ae7.firebaseapp.com',
+  projectId: 'ephemeral-22ae7',
 };
 firebase.initializeApp(firebaseConfig);
 
-export default firebase;
+export const db = firebase.firestore();
+export const auth = firebase.auth();
